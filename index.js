@@ -9,10 +9,10 @@ const fs = require('node:fs');
 const path = require('node:path');
 //const config = require("./config.json");
 
-require("dotenv").config();
+require('dotenv').config({ path: require('find-config')('.env') });
 
 // Make sure that all the three environment variables are declared.
-["TOKEN", "GUILD_ID", "CLIENT_ID", "PREFIX", "RULE_ROLE_ID", "HAVE_ROLE_ID", "REMOVE_ROLE_ID", "RULE_MESSAGE_ID", "NEW_MEMBER_CHANNEL_ID", "WELCOME_CHANNEL_ID", "LEAVE_CHANNEL_ID", "OWNER_ID"].forEach((env) => {
+["TOKEN", "GUILD_ID", "CLIENT_ID", "OWNER_ID", "PREFIX", "RULE_ROLE_ID", "HAVE_ROLE_ID", "REMOVE_ROLE_ID", "RULE_MESSAGE_ID", "NEW_MEMBER_CHANNEL_ID", "WELCOME_CHANNEL_ID", "LEAVE_CHANNEL_ID", "RULE_CHANNEL_ID"].forEach((env) => {
   if (!process.env[env]) {
     console.error(`Missing environment variable: ${env}`);
     process.exit(1);
