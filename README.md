@@ -1,2 +1,2 @@
-# dev_d2r2-bot
+# dev_r2d2-bot
 discord bot
