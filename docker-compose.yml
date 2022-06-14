@@ -1,7 +1,16 @@
 ---
 version: "3"
 services:
-    hostname: "dev_r2d2"
-    container_name: "dev_r2d2"
-    image: "discord-bot:latest"
+  dev_r2d2-bot:
+    hostname: "dev_r2d2-bot"
+    container_name: "dev_r2d2-bot"
+    environment:
+      - "PGID=1000"
+      - "PUID=1000"
+      - "TZ=Europe/Berlin"
+      - "UMASK=022"
+      - "TERM=xterm"
+    image: "ghcr.io/cyb3rgh05t/dev_r2d2-bot:latest"
     restart: "unless-stopped"
+    volumes:
+      - "/opt/appdata/dev_r2d2-bot/config:/config:rw"
