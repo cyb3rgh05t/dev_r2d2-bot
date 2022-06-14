@@ -3,7 +3,6 @@ FROM node:latest
 LABEL maintainer=cyb3rgh05t
 LABEL org.opencontainers.image.source https://github.com/cyb3rgh05t/dev_r2d2
 
-
 # Create the bot's directory
 RUN mkdir -p /usr/src/bot
 WORKDIR /usr/src/bot
