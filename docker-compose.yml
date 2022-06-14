@@ -1,0 +1,7 @@
+---
+version: "3"
+services:
+    hostname: "dev_r2d2"
+    container_name: "dev_r2d2"
+    image: "discord-bot:latest"
+    restart: "unless-stopped"
