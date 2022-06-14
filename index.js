@@ -8,8 +8,7 @@ const { Client, Intents, Collection, MessageEmbed } = require("discord.js");
 const fs = require('node:fs');
 const path = require('node:path');
 //const config = require("./config.json");
-
-require('dotenv').config({ path: require('find-config')('.env') });
+require('dotenv').config({path: path.relative(process.cwd(), path.join(__dirname, 'config','.env'))});
 
 // Make sure that all the three environment variables are declared.
 ["TOKEN", "GUILD_ID", "CLIENT_ID", "OWNER_ID", "PREFIX", "RULE_ROLE_ID", "HAVE_ROLE_ID", "REMOVE_ROLE_ID", "RULE_MESSAGE_ID", "NEW_MEMBER_CHANNEL_ID", "WELCOME_CHANNEL_ID", "LEAVE_CHANNEL_ID", "RULE_CHANNEL_ID"].forEach((env) => {
@@ -18,6 +17,14 @@ require('dotenv').config({ path: require('find-config')('.env') });
     process.exit(1);
   }
 });
+
+const botToken = process.env.TOKEN;
+const appClient = process.env.CLIENT_ID;
+const botPrefix = process.env.PREFIX;
+
+console.log(`Bot Token: ${botToken}`);
+console.log(`Client App ID: ${appClient}`);
+console.log(`Bot Prefix: ${botPrefix}`);
 
 // Create a client with the intents and partials required.
 const client  = new Client({
