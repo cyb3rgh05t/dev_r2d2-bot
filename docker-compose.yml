@@ -13,4 +13,4 @@ services:
     image: "ghcr.io/cyb3rgh05t/dev_r2d2-bot:latest"
     restart: "unless-stopped"
     volumes:
-      - "/opt/appdata/dev_r2d2-bot/config:/config:rw"
+      - "/opt/appdata/dev_r2d2-bot/config:/usr/src/bot/config:rw"
