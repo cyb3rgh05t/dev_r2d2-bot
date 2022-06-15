@@ -3,11 +3,11 @@
 // StreamNet Club
 
 
-const { Client, Intents, Collection, MessageEmbed } = require("discord.js");
+const { Client, Intents, Collection } = require("discord.js");
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 //const { ReactionRole } = require("discordjs-reaction-role");
 const fs = require('node:fs');
 const path = require('node:path');
-//const config = require("./config.json");
 require('dotenv').config({path: path.relative(process.cwd(), path.join(__dirname, 'config','.env'))});
 
 // Make sure that all the three environment variables are declared.
@@ -22,9 +22,9 @@ const botToken = process.env.TOKEN;
 const appClient = process.env.CLIENT_ID;
 const botPrefix = process.env.PREFIX;
 
-console.log(`Bot Token: ${botToken}`);
-console.log(`Client App ID: ${appClient}`);
-console.log(`Bot Prefix: ${botPrefix}`);
+console.log(`Bot Token : "${botToken}"`);
+console.log(`Client App ID : "${appClient}"`);
+console.log(`Bot Prefix : "${botPrefix}"`);
 
 // Create a client with the intents and partials required.
 const client  = new Client({
@@ -93,6 +93,51 @@ client.on("messageCreate", (message) => {
   if (message.content.startsWith(`${prefix}foo`)) {
     message.channel.send("bar!");
   }
+});
+
+// Button Handler
+client.on('interactionCreate', async interaction => {
+    if (interaction.isButton()) {
+        const buttonID = interaction.customId;
+        if (buttonID === 'primary') { // get button by customId set below
+            const member = interaction.member; // get member from the interaction - person who clicked the button
+
+            if (member.roles.cache.has(process.env.RULE_ROLE_ID)) { // if they already have the role
+                member.roles.remove(process.env.RULE_ROLE_ID); // remove it
+                return interaction.reply({
+                    content: 'Rolle wurde entfernt!',
+                    ephemeral: true
+                });
+            } else { // if they don't have the role
+			    const { guild } = interaction.message //store the guild of the reaction in variable
+				const member = interaction.member;
+                const welcomeChannel = member.guild.channels.cache.get(process.env.WELCOME_CHANNEL_ID);
+			    const welcomeMessage =`Hey ${member}, willkommen in der Community 😀\nSchau dir den <#825364230827409479> Channel an und befolge die Schritte wenn du Zutritt zum Server willst!`;
+                welcomeChannel.send(welcomeMessage);
+			    console.log(`Welcome message for "${member.user.username}" was send to the #general channel!`);
+                member.roles.add(process.env.RULE_ROLE_ID); // add it
+                return interaction.reply({
+                    content: 'Rolle wurde hintugefügt!',
+                    ephemeral: true
+                })
+            }
+        }
+    }
+});
+
+client.on("messageCreate", async message => {
+   if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (message.content.startsWith(`${prefix}addreactionrole`)) {
+      
+        const row = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                .setCustomId('primary')
+		        .setLabel('Bestätige die Regeln mit einem Klick')
+		        .setStyle('SUCCESS'),
+            );
+        message.channel.send({ files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/SNC_DISCORD.png.png?raw=true"], content: `**Bitte akzeptiert die Regeln für VERIFIED-MEMBER Rolle:**\n\n**\`\`\`diff\n- Regel #1:  Streng verboten\`\`\`**\n• Es ist strengstens verboten für StreamNet.Club zu **werben**.\n• Es ist strengstens verboten StreamNet einem nicht vorhandenen Mitglied zu **demonstrieren**.\n• Es ist strengstens verboten über StreamNet.Club  mit einem nicht vorhandenen Mitglied zu **diskutieren**.\n• Du darfst dein StreamNet Konto **nicht** mit anderen Personen **teilen**.\n\n**\`\`\`diff\n- Regel #2:  Sei kein Ars##\`\`\`**\n• Sei allen auf dem Server gegenüber respektvoll.\n\n**\`\`\`diff\n- Regel #3:  Verwende die entsprechenden Kanäle\`\`\`**\n• Bitte verwende den richtigen Kanal für deine Frage und bleib innerhalb des Kanals beim Thema.\n\n**\`\`\`diff\n- Regel #4:  Sei geduldig\`\`\`**\n• Nicht jeder ist jederzeit verfügbar. Jemand wird dir antworten, wenn er kann.\n==============================\n `, components: [row] })
+    }
 });
 
 /*
