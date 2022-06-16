@@ -112,20 +112,6 @@ for (const file of commandFiles) {
 // Bot command prefix.
 const prefix = process.env.PREFIX;
 
-// Test bot commands with prefix.
-client.on("messageCreate", (message) => {
-  // Exit and stop if the prefix is not there or if user is a bot
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-  if (message.content.startsWith(`${prefix}ping`)) {
-    message.channel.send("pong!");
-  } else
-
-  if (message.content.startsWith(`${prefix}foo`)) {
-    message.channel.send("bar!");
-  }
-});
-
 client.on("messageCreate", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
