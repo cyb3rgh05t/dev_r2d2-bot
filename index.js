@@ -41,6 +41,9 @@ console.log(`Client App ID = "${appClient}"`);
 console.log(`Getting Bot Prefix....`);
 console.log(`Bot Prefix = "${botPrefix}"`);
 
+client.login(process.env.TOKEN).then(() => {
+    client.user.setPresence({ activities: [{ name: 'StreamNet', type: 'WATCHING' }], status: 'online' });
+});
 
 // Create a client with the intents and partials required.
 const client  = new Client({
@@ -114,7 +117,7 @@ client.on("messageCreate", (message) => {
   }
 });
 
-// Send Cannel Logos
+// Send Channel Logos
 client.on("messageCreate", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
