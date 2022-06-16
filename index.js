@@ -5,13 +5,25 @@
 
 const { Client, Intents, Collection } = require("discord.js");
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-//const { ReactionRole } = require("discordjs-reaction-role");
 const fs = require('node:fs');
 const path = require('node:path');
 require('dotenv').config({path: path.relative(process.cwd(), path.join(__dirname, 'config','.env'))});
 
 // Make sure that all the three environment variables are declared.
-["TOKEN", "GUILD_ID", "CLIENT_ID", "OWNER_ID", "PREFIX", "RULE_ROLE_ID", "HAVE_ROLE_ID", "REMOVE_ROLE_ID", "RULE_MESSAGE_ID", "NEW_MEMBER_CHANNEL_ID", "WELCOME_CHANNEL_ID", "LEAVE_CHANNEL_ID", "RULE_CHANNEL_ID"].forEach((env) => {
+["TOKEN", 
+ "GUILD_ID", 
+ "CLIENT_ID", 
+ "OWNER_ID", 
+ "PREFIX", 
+ "RULE_ROLE_ID", 
+ "HAVE_ROLE_ID", 
+ "REMOVE_ROLE_ID", 
+ "RULE_MESSAGE_ID", 
+ "NEW_MEMBER_CHANNEL_ID", 
+ "WELCOME_CHANNEL_ID", 
+ "LEAVE_CHANNEL_ID", 
+ "RULE_CHANNEL_ID"].forEach((env) => {
+  
   if (!process.env[env]) {
     console.error(`Missing environment variable: ${env}`);
     process.exit(1);
@@ -22,9 +34,13 @@ const botToken = process.env.TOKEN;
 const appClient = process.env.CLIENT_ID;
 const botPrefix = process.env.PREFIX;
 
-console.log(`Bot Token : "${botToken}"`);
-console.log(`Client App ID : "${appClient}"`);
-console.log(`Bot Prefix : "${botPrefix}"`);
+console.log(`Getting Bot token....`);
+console.log(`Bot Token = "${botToken}"`);
+console.log(`Getting Client App ID....`);
+console.log(`Client App ID = "${appClient}"`);
+console.log(`Getting Bot Prefix....`);
+console.log(`Bot Prefix = "${botPrefix}"`);
+
 
 // Create a client with the intents and partials required.
 const client  = new Client({
@@ -35,6 +51,22 @@ const client  = new Client({
     Intents.FLAGS.GUILD_MEMBERS |
     Intents.FLAGS.GUILDS,
 });
+
+
+// Reading events.
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+};
+
 
 // Reading commands.
 client.commands = new Collection();
@@ -64,19 +96,6 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-// Reading events.
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
-
-for (const file of eventFiles) {
-	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args));
-	}
-}
 
 // Bot command prefix.
 const prefix = process.env.PREFIX;
@@ -94,6 +113,17 @@ client.on("messageCreate", (message) => {
     message.channel.send("bar!");
   }
 });
+
+// Send Cannel Logos
+client.on("messageCreate", (message) => {
+  // Exit and stop if the prefix is not there or if user is a bot
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  if (message.content.startsWith(`${prefix}ruleimage`)) {
+    message.channel.send({ files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/SNC_DISCORD.png.png?raw=true"]});
+  }
+});
+
 
 // Button Handler
 client.on('interactionCreate', async interaction => {
@@ -136,22 +166,9 @@ client.on("messageCreate", async message => {
 		        .setLabel('Bestätige die Regeln mit einem Klick')
 		        .setStyle('SUCCESS'),
             );
-        message.channel.send({ files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/SNC_DISCORD.png.png?raw=true"], content: `**Bitte akzeptiert die Regeln für VERIFIED-MEMBER Rolle:**\n\n**\`\`\`diff\n- Regel #1:  Streng verboten\`\`\`**\n• Es ist strengstens verboten für StreamNet.Club zu **werben**.\n• Es ist strengstens verboten StreamNet einem nicht vorhandenen Mitglied zu **demonstrieren**.\n• Es ist strengstens verboten über StreamNet.Club  mit einem nicht vorhandenen Mitglied zu **diskutieren**.\n• Du darfst dein StreamNet Konto **nicht** mit anderen Personen **teilen**.\n\n**\`\`\`diff\n- Regel #2:  Sei kein Ars##\`\`\`**\n• Sei allen auf dem Server gegenüber respektvoll.\n\n**\`\`\`diff\n- Regel #3:  Verwende die entsprechenden Kanäle\`\`\`**\n• Bitte verwende den richtigen Kanal für deine Frage und bleib innerhalb des Kanals beim Thema.\n\n**\`\`\`diff\n- Regel #4:  Sei geduldig\`\`\`**\n• Nicht jeder ist jederzeit verfügbar. Jemand wird dir antworten, wenn er kann.\n==============================\n `, components: [row] })
+        message.channel.send({ content: `**Bitte akzeptiert die Regeln für VERIFIED-MEMBER Rolle:**\n\n**\`\`\`diff\n- Regel #1:  Streng verboten\`\`\`**\n• Es ist strengstens verboten für StreamNet.Club zu **werben**.\n• Es ist strengstens verboten StreamNet einem nicht vorhandenen Mitglied zu **demonstrieren**.\n• Es ist strengstens verboten über StreamNet.Club  mit einem nicht vorhandenen Mitglied zu **diskutieren**.\n• Du darfst dein StreamNet Konto **nicht** mit anderen Personen **teilen**.\n\n**\`\`\`diff\n- Regel #2:  Sei kein Ars##\`\`\`**\n• Sei allen auf dem Server gegenüber respektvoll.\n\n**\`\`\`diff\n- Regel #3:  Verwende die entsprechenden Kanäle\`\`\`**\n• Bitte verwende den richtigen Kanal für deine Frage und bleib innerhalb des Kanals beim Thema.\n\n**\`\`\`diff\n- Regel #4:  Sei geduldig\`\`\`**\n• Nicht jeder ist jederzeit verfügbar. Jemand wird dir antworten, wenn er kann.\n==============================\n `, components: [row] })
     }
 });
-
-/*
-// ReactionRoles
-// Create a new manager and use it.
-const configuration = [
-  {
-    messageId: process.env.RULE_MESSAGE_ID,
-    reaction: "✅", // :white_check_mark:
-    roleId: process.env.RULE_ROLE_ID,
-  },
-];
-const manager = new ReactionRole(client, configuration);
-*/
 
 
 // Add role on message react.
@@ -229,11 +246,6 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
     }
 });
 
-
-// Start the bot.
-client.login(process.env.TOKEN).then(() => {
-    client.user.setPresence({ activities: [{ name: 'StreamNet', type: 'WATCHING' }], status: 'online' });
-});
 
 // Stop the bot when the process is closed (via Ctrl-C).
 const destroy = () => {
