@@ -144,6 +144,7 @@ client.on("messageCreate", (message) => {
                                      **3. **Folge den Anweisungen vom **<@825635238188285952>** !\n
                                      **4. **Akzeptiere die **PLEX-EINLADUNG** für StreamNet in deiner **PLEX EMAIL BOX**! (für manuelle Aktivierung <#864928903000227850> )\n
                                      Viel Spass beim streamen.. <:streamnet:855771751820296232>`});
+   });
 });
 
 client.on("messageCreate", (message) => {
