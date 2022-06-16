@@ -41,10 +41,6 @@ console.log(`Client App ID = "${appClient}"`);
 console.log(`Getting Bot Prefix....`);
 console.log(`Bot Prefix = "${botPrefix}"`);
 
-// Start the bot.
-client.login(process.env.TOKEN).then(() => {
-    client.user.setPresence({ activities: [{ name: 'StreamNet', type: 'WATCHING' }], status: 'online' });
-});
 
 // Create a client with the intents and partials required.
 const client  = new Client({
@@ -247,6 +243,10 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
     }
 });
 
+// Start the bot.
+client.login(process.env.TOKEN).then(() => {
+    client.user.setPresence({ activities: [{ name: 'StreamNet', type: 'WATCHING' }], status: 'online' });
+});
 
 // Stop the bot when the process is closed (via Ctrl-C).
 const destroy = () => {
