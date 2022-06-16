@@ -5,5 +5,6 @@ module.exports = {
 		console.log(`Starting Bot ....`);
 		console.log(`Ready! Bot is online!`);
 		console.log(`Logged in as "${client.user.tag}"`);
-	},
+		client.user.setPresence({ activities: [{ name: 'StreamNet', type: 'WATCHING' }], status: 'online' });
+	}
 };

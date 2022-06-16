@@ -100,6 +100,20 @@ client.on('interactionCreate', async interaction => {
 const prefix = process.env.PREFIX;
 
 client.on("messageCreate", (message) => {
+    // Exit and stop if it's not there
+    if (!message.content.startsWith(prefix)) return;
+  
+    // The back ticks are Template Literals introduced in Javascript in ES6 or ES2015, as an replacement for String Concatenation Read them up here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+    if (message.content.startsWith(`${prefix}ping`)) {
+      message.channel.send("pong!");
+    } else
+  
+    if (message.content.startsWith(`${prefix}foo`)) {
+      message.channel.send("bar!");
+    }
+  });
+
+client.on("messageCreate", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -251,6 +265,7 @@ client.on('messageReactionRemove', async (reaction, user) => {
     }
 });
 
+
 // Send new member message.
 client.on('guildMemberAdd', (member) => {
     const newMemberChannel = member.guild.channels.cache.get(process.env.NEW_MEMBER_CHANNEL_ID)
@@ -280,14 +295,4 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
 });
 
 // Start the bot.
-client.login(process.env.TOKEN).then(() => {
-    client.user.setPresence({ activities: [{ name: 'StreamNet', type: 'WATCHING' }], status: 'online' });
-});
-
-// Stop the bot when the process is closed (via Ctrl-C).
-const destroy = () => {
-  manager.teardown();
-  client.destroy();
-};
-process.on("SIGINT", destroy);
-process.on("SIGTERM", destroy);
+client.login(process.env.TOKEN);
