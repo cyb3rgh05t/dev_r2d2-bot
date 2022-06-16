@@ -86,27 +86,20 @@ client.config = config;
 client.commands = new Collection();
 
 // Reading events.
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+for (const file of events) {
+  const eventName = file.split(".")[0];
+  const event = require(`./events/${file}`);
+  client.on(eventName, event.bind(null, client));
+}
 
-for (const file of eventFiles) {
-	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args));
-	}
-};
+const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+for (const file of commands) {
+  const commandName = file.split(".")[0];
+  const command = require(`./commands/${file}`);
 
-// Reading Prefix commands
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
+  console.log(`Attempting to load command ${commandName}`);
+  client.commands.set(commandName, command);
 }
 
 // Bot command prefix.
