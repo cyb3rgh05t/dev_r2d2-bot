@@ -83,7 +83,7 @@ client.on('interactionCreate', async interaction => {
 */
 
 client.config = config;
-client.commands = new Discord.Collection();
+client.commands = new Collection();
 
 // Reading events.
 const eventsPath = path.join(__dirname, 'events');
