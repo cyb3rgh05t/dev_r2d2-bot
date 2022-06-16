@@ -5,7 +5,7 @@
 
 const { Client, Intents, Collection } = require("discord.js");
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const fs = require('node:fs');
+const fs = require('fs');
 const path = require('node:path');
 require('dotenv').config({path: path.relative(process.cwd(), path.join(__dirname, 'config','.env'))});
 const config = require('dotenv').config({path: path.relative(process.cwd(), path.join(__dirname, 'config','.env'))});
@@ -85,7 +85,6 @@ client.on('interactionCreate', async interaction => {
 client.config = config;
 client.commands = new Collection();
 
-// Reading events.
 const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
 for (const file of events) {
   const eventName = file.split(".")[0];
