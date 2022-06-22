@@ -2,7 +2,6 @@
 // cyb3rgh05t
 // StreamNet Club
 
-
 const { Client, Intents, Collection, MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 const fs = require('node:fs');
 const path = require('node:path');
@@ -100,20 +99,6 @@ client.on('interactionCreate', async interaction => {
 const prefix = process.env.PREFIX;
 
 client.on("messageCreate", (message) => {
-    // Exit and stop if it's not there
-    if (!message.content.startsWith(prefix)) return;
-  
-    // The back ticks are Template Literals introduced in Javascript in ES6 or ES2015, as an replacement for String Concatenation Read them up here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
-    if (message.content.startsWith(`${prefix}ping`)) {
-      message.channel.send("pong!");
-    } else
-  
-    if (message.content.startsWith(`${prefix}foo`)) {
-      message.channel.send("bar!");
-    }
-  });
-
-client.on("messageCreate", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -155,7 +140,7 @@ client.on("messageCreate", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  if (message.content.startsWith(`${prefix}logoimage`)) {
+  if (message.content.startsWith(`${prefix}welcomeimage`)) {
     message.channel.send({ files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/SNC_DISCORD.png.png?raw=true"]});
   }
   else if (message.content.startsWith(`${prefix}donateimage`)) {
@@ -172,6 +157,22 @@ client.on("messageCreate", (message) => {
   }
 });
 
+
+client.on("messageCreate", async message => {
+   if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (message.content.startsWith(`${prefix}addreactionrole`)) {
+      
+        const button = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                .setCustomId('primary')
+		        .setLabel('Bestätige die Regeln mit einem Klick')
+		        .setStyle('SUCCESS'),
+            );
+        message.channel.send({ content: `**Bitte akzeptiert die Regeln für die MEMBER Rolle:**\n\n**\`\`\`diff\n- Regel #1:  Streng verboten\`\`\`**\n• Es ist strengstens verboten für StreamNet.Club zu **werben**.\n• Es ist strengstens verboten StreamNet einem nicht vorhandenen Mitglied zu **demonstrieren**.\n• Es ist strengstens verboten über StreamNet.Club  mit einem nicht vorhandenen Mitglied zu **diskutieren**.\n• Du darfst dein StreamNet Konto **nicht** mit anderen Personen **teilen**.\n\n**\`\`\`diff\n- Regel #2:  Sei kein Ars##\`\`\`**\n• Sei allen auf dem Server gegenüber respektvoll.\n\n**\`\`\`diff\n- Regel #3:  Verwende die entsprechenden Kanäle\`\`\`**\n• Bitte verwende den richtigen Kanal für deine Frage und bleib innerhalb des Kanals beim Thema.\n\n**\`\`\`diff\n- Regel #4:  Sei geduldig\`\`\`**\n• Nicht jeder ist jederzeit verfügbar. Jemand wird dir antworten, wenn er kann.\n==============================\n `, components: [button] })
+    }
+});
+
 // Button Handler
 client.on('interactionCreate', async interaction => {
     if (interaction.isButton()) {
@@ -179,12 +180,13 @@ client.on('interactionCreate', async interaction => {
         if (buttonID === 'primary') { // get button by customId set below
             const member = interaction.member; // get member from the interaction - person who clicked the button
 
-            if (member.roles.cache.has(process.env.RULE_ROLE_ID)) { // if they already have the role
-                member.roles.remove(process.env.RULE_ROLE_ID); // remove it
+            if (member.roles.cache.has(process.env.HAVE_ROLE_ID) || member.roles.cache.has(process.env.RULE_ROLE_ID)) { // if they already have the role
+               // member.roles.remove(process.env.RULE_ROLE_ID); // remove it
                 return interaction.reply({
-                    content: 'Rolle wurde entfernt!',
+                    content: 'Regeln wurden schon bestätigt!!',
                     ephemeral: true
                 });
+                
             } else { // if they don't have the role
 			    const { guild } = interaction.message //store the guild of the reaction in variable
 				const member = interaction.member;
@@ -194,7 +196,7 @@ client.on('interactionCreate', async interaction => {
 			    console.log(`Welcome message for "${member.user.username}" was send to the #general channel!`);
                 member.roles.add(process.env.RULE_ROLE_ID); // add it
                 return interaction.reply({
-                    content: 'Rolle wurde hintugefügt!',
+                    content: 'Regeln bestätigt und Rolle wurde hinzugefügt!',
                     ephemeral: true
                 })
             }
@@ -202,22 +204,7 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
-client.on("messageCreate", async message => {
-   if (!message.content.startsWith(prefix) || message.author.bot) return;
-    if (message.content.startsWith(`${prefix}addreactionrole`)) {
-      
-        const row = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                .setCustomId('primary')
-		        .setLabel('Bestätige die Regeln mit einem Klick')
-		        .setStyle('SUCCESS'),
-            );
-        message.channel.send({ content: `**Bitte akzeptiert die Regeln für die MEMBER Rolle:**\n\n**\`\`\`diff\n- Regel #1:  Streng verboten\`\`\`**\n• Es ist strengstens verboten für StreamNet.Club zu **werben**.\n• Es ist strengstens verboten StreamNet einem nicht vorhandenen Mitglied zu **demonstrieren**.\n• Es ist strengstens verboten über StreamNet.Club  mit einem nicht vorhandenen Mitglied zu **diskutieren**.\n• Du darfst dein StreamNet Konto **nicht** mit anderen Personen **teilen**.\n\n**\`\`\`diff\n- Regel #2:  Sei kein Ars##\`\`\`**\n• Sei allen auf dem Server gegenüber respektvoll.\n\n**\`\`\`diff\n- Regel #3:  Verwende die entsprechenden Kanäle\`\`\`**\n• Bitte verwende den richtigen Kanal für deine Frage und bleib innerhalb des Kanals beim Thema.\n\n**\`\`\`diff\n- Regel #4:  Sei geduldig\`\`\`**\n• Nicht jeder ist jederzeit verfügbar. Jemand wird dir antworten, wenn er kann.\n==============================\n `, components: [row] })
-    }
-});
-
-
+/*
 // Add role on message react.
 client.on('messageReactionAdd', async (reaction, user) => {
     if (reaction.partial) { //this whole section just checks if the reaction is partial
@@ -264,7 +251,7 @@ client.on('messageReactionRemove', async (reaction, user) => {
         }
     }
 });
-
+*/
 
 // Send new member message.
 client.on('guildMemberAdd', (member) => {
@@ -290,7 +277,7 @@ client.on('guildMemberRemove', (member) => {
 client.on("guildMemberUpdate", (oldMember, newMember) => {
     if (newMember.roles.cache.some(role => role.id === process.env.HAVE_ROLE_ID)) {
         newMember.roles.remove(process.env.REMOVE_ROLE_ID);
-	    console.log(`"${newMember.user.username}" got a Plex-Invite!`);
+	    console.log(`"${newMember.user.username}" got Streamnet role, please check to send the invitebot`);
     }
 });
 
