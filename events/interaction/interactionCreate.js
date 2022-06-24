@@ -22,7 +22,8 @@ module.exports = {
                 return interaction.reply({ content: `You do not have the required permission for this command: \`${interaction.commandName}\`.`, ephemeral: true })
             }
 
-            command.execute(interaction, client)
+            command.execute(interaction, client);
+            console.log(`${interaction.user.tag} in channel #${interaction.channel.name} triggered an interaction "/${interaction.commandName}".`)
         }
 
         if (interaction.isButton()) {
