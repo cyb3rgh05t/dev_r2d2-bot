@@ -1,14 +1,20 @@
-const { CommandInteraction } = require("discord.js");
+const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 
 module.exports = {
     name: "ping",
-    description: "Ping",
+    description: "Sends the client's ping",
     permission: "ADMINISTRATOR",
+    cooldown: 5,
     /**
      * 
      * @param {CommandInteraction} interaction
+     * @param {Client} client
      */
-    execute(interaction) {
-        interaction.reply({content: "Pong"})
+    async execute(interaction, client) {
+
+        const Response = new MessageEmbed()
+        .setColor('GREEN')
+        .setDescription(`🏓 ${client.ws.ping}ms`);
+        interaction.reply({embeds: [Response]})
     }
 }

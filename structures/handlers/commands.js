@@ -1,13 +1,12 @@
 const { Perms } = require("../validation/permissions");
-const { client } = require("discord.js");
-const { promisify } = require("util");
-const { glob } = require("glob");
-const PG = promisify(glob);
-const Ascii = require("ascii-table")
+const { Client } = require("discord.js");
 const { GuildId } = require("../config/config.json");
 
-
-module.exports = async(client) => {
+/**
+ * 
+ * @param {Client} client 
+ */
+module.exports = async(client, PG, Ascii) => {
   const Table = new Ascii("Command Loaded");
 
   CommandsArray = [];
@@ -16,22 +15,22 @@ module.exports = async(client) => {
     const command = require(file);
 
     if(!command.name)
-      return Table.addRow(file.split("/")[7], "✖ FAILED", "missing a name.")
+      return Table.addRow(file.split("/")[7], "🔸 FAILED", "missing a name.")
 
-    if(!command.description)
-      return Table.addRow(command.name, "✖ FAILED", "missing a description.")
+    if(!command.context && !command.description)
+      return Table.addRow(command.name, "🔸 FAILED", "missing a description.")
 
     if(command.permission) {
       if(Perms.includes(command.permission))
         command.defaultPermission = false;
       else
-        return Table.addRow(command.name, "✖ FAILED", "Permission is invalid.")
+        return Table.addRow(command.name, "🔸 FAILED", "Permission is invalid.")
     }
 
     client.commands.set(command.name, command);
     CommandsArray.push(command);
 
-    await Table.addRow(command.name,"✔ SUCCESSFUL");
+    await Table.addRow(command.name,"🔹 SUCCESSFUL");
     
   });
 

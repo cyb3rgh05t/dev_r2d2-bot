@@ -1,5 +1,5 @@
-const { Client, Intents, Collection, MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
-const { Prefix } = require("../../config/config.json");
+const { MessageActionRow, MessageButton } = require("discord.js");
+const { Prefix } = require("../../structures/config/config.json");
 
 module.exports = {
     name: "messageCreate",

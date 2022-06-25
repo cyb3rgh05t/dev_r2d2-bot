@@ -1,5 +1,5 @@
 const { GuildMember, MessageEmbed } = require("discord.js");
-const { LeaveChannelId } = require("../../config/config.json");
+const { LeaveChannelId } = require("../../structures/config/config.json");
 
 module.exports = {
     name: "guildMemberRemove",

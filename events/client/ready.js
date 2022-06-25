@@ -1,6 +1,6 @@
 const { Client } = require("discord.js");
 const mongoose = require("mongoose");
-const { Database, Token, ClientId, Prefix } = require("../../config/config.json");
+const { DatabaseUrl, Token, ClientId, Prefix } = require("../../structures/config/config.json");
 
 module.exports = {
     name: "ready",
@@ -10,23 +10,29 @@ module.exports = {
      * @param {Client} client 
      */
     execute(client) {
-        console.log(`Starting Bot ....`);
-        console.log(`Getting Bot Token ....`);
-        console.log(`✔ Bot Token = "${Token}"`);
-        console.log(`Getting Client App ID ....`);
-        console.log(`✔ Client App ID = "${ClientId}"`);
-        console.log(`Getting Bot Prefix ....`);
-        console.log(`✔ Bot Prefix = "${Prefix}"`);
-		console.log(`✔ Logged in as "${client.user.tag}"`);
-        console.log("✔ Bot is now ready and online!")
+        console.log(`----`);
+        console.log(`🔶 Starting Client ....`);
+        console.log(`🔶 Getting Client Token ....`);
+        console.log(`----`);
+        console.log(`✅ Client Token = "${Token}"`);
+        console.log(`----`);
+        console.log(`🔶 Getting Client App ID ....`);
+        console.log(`----`);
+        console.log(`✅ Client App ID = "${ClientId}"`);
+        console.log(`----`);
+        console.log(`🔶 Getting Client Prefix ....`);
+        console.log(`----`);
+        console.log(`✅ Client Prefix = "${Prefix}"`);
+        console.log(`----`);
+        console.log("✅ Client is now ready and online!")
         client.user.setActivity("StreamNet", {type: "WATCHING"})
 
-        if (!Database) return;
-        mongoose.connect(Database, {
+        if (!DatabaseUrl) return;
+        mongoose.connect(DatabaseUrl, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         }).then(() => {
-            console.log("✔ Bot is now connected to the database!")
+            console.log("✅ Client is now connected to the database!")
         }).catch((err) => {
             console.log(err)
         });

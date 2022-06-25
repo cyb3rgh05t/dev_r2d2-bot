@@ -1,5 +1,5 @@
 const { GuildMember } = require("discord.js");
-const {NewMemberChannelId } = require("../../config/config.json");
+const {NewMemberChannelId } = require("../../structures/config/config.json");
 
 module.exports = {
     name: "guildMemberAdd",

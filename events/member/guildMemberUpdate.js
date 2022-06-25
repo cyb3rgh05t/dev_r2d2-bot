@@ -1,5 +1,5 @@
 const { GuildMember } = require("discord.js");
-const { HaveRoleId, RemoveRoleId } = require("../../config/config.json");
+const { HaveRoleId, RemoveRoleId } = require("../../structures/config/config.json");
 
 module.exports = {
     name: "guildMemberUpdate",
