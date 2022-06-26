@@ -7,7 +7,7 @@ const { GuildId } = require("../config/config.json");
  * @param {Client} client 
  */
 module.exports = async(client, PG, Ascii) => {
-  const Table = new Ascii("Command Loaded");
+  const Table = new Ascii("Commands Loaded");
 
   CommandsArray = [];
   

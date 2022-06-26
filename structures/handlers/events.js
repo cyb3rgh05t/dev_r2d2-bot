@@ -1,7 +1,7 @@
 const { Events } = require("../validation/eventNames");
 
 module.exports = async (client, PG, Ascii) => {
-    const Table = new Ascii("Events loaded");
+    const Table = new Ascii("Events Loaded");
 
     (await PG(`${(process.cwd().replace(/\\/g, "/"))}/events/*/*.js`)).map(async (file) => {
         const event = require(file);
