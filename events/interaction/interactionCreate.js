@@ -10,7 +10,7 @@ module.exports = {
      */
 
     async execute(interaction, client) {
-        if(interaction.isCommand()) {
+        if(interaction.isCommand() || interaction.isContextMenu()) {
             const command = client.commands.get(interaction.commandName);
             if (!command) return interaction.reply({embeds: [
                 new MessageEmbed()
@@ -34,7 +34,7 @@ module.exports = {
                 if (member.roles.cache.has(RuleRoleId) || member.roles.cache.has(HaveRoleId)) { // if they already have the role
                    // member.roles.remove(process.env.RULE_ROLE_ID); // remove it
                     return interaction.reply({
-                        content: 'Regeln wurden schon bestätigt!!',
+                        content: 'Du hast die Regeln schon bestätigt!!',
                         ephemeral: true
                     });
                     

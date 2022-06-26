@@ -25,7 +25,7 @@ module.exports = {
         console.log(`✅ Client Prefix = "${Prefix}"`);
         console.log(`----`);
         console.log("✅ Client is now ready and online!")
-        client.user.setActivity("StreamNet", {type: "WATCHING"})
+        client.user.setActivity("Dev", {type: "WATCHING"})
 
         if (!DatabaseUrl) return;
         mongoose.connect(DatabaseUrl, {
