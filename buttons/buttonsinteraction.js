@@ -17,5 +17,6 @@ module.exports = {
         return interaction.reply({content: "You are not the owner.", ephemeral: true});
 
         Button.execute(interaction, client);
+        
     }
 }
