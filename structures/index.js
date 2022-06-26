@@ -6,10 +6,11 @@ const { glob } = require("glob");
 const PG = promisify(glob);
 const Ascii = require("ascii-table")
 
-client.commands = new Collection ();
+client.commands = new Collection();
+client.buttons = new Collection();
 client.cooldowns = new Collection();
 
-["events", "commands"].forEach(handler => {
+["events", "commands", "buttons"].forEach(handler => {
     require(`./handlers/${handler}`)(client, PG, Ascii)
 });
 
