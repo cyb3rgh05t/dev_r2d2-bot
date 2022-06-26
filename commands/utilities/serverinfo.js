@@ -14,19 +14,23 @@ module.exports = {
 
       const Embed = new MessageEmbed()
       .setColor("BLUE")
-      .setAuthor(guild.name, guild.iconURL({dynamic: true}))
+      //.setAuthor(guild.name, guild.iconURL({dynamic: true}))
+      .setAuthor({ name: guild.name, iconURL: guild.iconURL({dynamic: true})})
       .setThumbnail(guild.iconURL({dynamic: true}))
       .addFields(
         {
           name: "GENERAL",
           value:
           `
-          Name: ${guild.name}
+
+          Name: **${guild.name}**
           Created: <t:${parseInt(createdTimestamp / 1000)}:R>
           Owner: <@${ownerId}>
 
-          Description: ${description}
+          Description:
+          **${description}**
 
+          
           `
         },
         {
@@ -37,6 +41,7 @@ module.exports = {
             - Bots: ${members.cache.filter((m) => m.user.bot).size}
 
             Total: ${memberCount}
+
             `
         },
         {
@@ -51,6 +56,7 @@ module.exports = {
             - News: ${channels.cache.filter((c) => c.type === "GUILD_NEWS").size}
 
             Total: ${channels.cache.size}
+
             `
          
         }
