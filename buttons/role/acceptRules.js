@@ -1,7 +1,7 @@
 const { RuleRoleId, HaveRoleId, WelcomeChannelId } = require("../../structures/config/config.json");
 
 module.exports = {
-    id: "acceptRules",
+    id: "acceptRole",
     execute(interaction) {
         const member = interaction.member; // get member from the interaction - person who clicked the button
     
