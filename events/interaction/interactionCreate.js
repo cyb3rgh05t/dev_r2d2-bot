@@ -28,7 +28,7 @@ module.exports = {
 
         if (interaction.isButton()) {
             const buttonID = interaction.customId;
-            if (buttonID === 'primary') { // get button by customId set below
+            if (buttonID === 'acceptRole') { // get button by customId set below
                 const member = interaction.member; // get member from the interaction - person who clicked the button
     
                 if (member.roles.cache.has(RuleRoleId) || member.roles.cache.has(HaveRoleId)) { // if they already have the role
