@@ -15,7 +15,7 @@ module.exports = {
              const button = new MessageActionRow()
                  .addComponents(
                      new MessageButton()
-                     .setCustomId('primary')
+                     .setCustomId('acceptRole')
                      .setLabel('Bestätige die Regeln mit einem Klick')
                      .setStyle('SUCCESS'),
                  );
