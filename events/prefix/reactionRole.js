@@ -12,7 +12,7 @@ module.exports = {
         if (!message.content.startsWith(prefix) || message.author.bot) return;
          if (message.content.startsWith(`${prefix}addreactionrole`)) {
            
-             const button = new MessageActionRow()
+             const row = new MessageActionRow()
                  .addComponents(
                      new MessageButton()
                      .setCustomId('acceptRole')
