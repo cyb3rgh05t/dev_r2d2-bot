@@ -5,6 +5,7 @@ module.exports = {
     /**
      * 
      * @param {ButtonInteraction} interaction
+     * @param {Client} client
      */
     execute(interaction, client) {
         if(!interaction.isButton()) return;

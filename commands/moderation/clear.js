@@ -45,12 +45,12 @@ module.exports = {
 
                 await channel.bulkDelete(filtered, true).then(messages => {
                     Response.setDescription(`🧹 Cleard ${messages.size} from ${Target}.`);
-                    interaction.reply({embeds: [Response]});
+                    interaction.reply({embeds: [Response], ephemeral: true});
                 })
             } else {
                 await channel.bulkDelete(Amount, true).then(messages => {
                     Response.setDescription(`🧹 Cleard ${messages.size} from this channel.`);
-                    interaction.reply({embeds: [Response]});
+                    interaction.reply({embeds: [Response], ephemeral: true});
             })
         }
     }
