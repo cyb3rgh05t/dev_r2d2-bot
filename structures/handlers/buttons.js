@@ -7,7 +7,7 @@ module.exports = async (client, PG, Ascii) => {
         if(!buttonFile.id) return;
 
         client.buttons.set(buttonFile.id, buttonFile);
-        Table.addRow(buttonFile.id, "🔹 LOADED");
+        Table.addRow(buttonFile.id, "🟩 LOADED");
     });
     console.log(Table.toString());
 }
