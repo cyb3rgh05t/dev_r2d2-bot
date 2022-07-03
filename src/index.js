@@ -21,7 +21,7 @@ client.userSettings = new Collection();
 });
 
 client.login(Token).then(() => {
-    console.log(`${chalk.yellow("[INFO] ")}Logged In as ` + client.user.tag);
+    console.log(`${chalk.yellow("[INFO] ")}Logged in as ` + client.user.tag);
 }).catch((err) => {
     console.log(err)
 });
