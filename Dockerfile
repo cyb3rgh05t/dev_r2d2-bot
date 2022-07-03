@@ -11,9 +11,7 @@ COPY package.json /usr/src/bot
 RUN apt-get update && apt-get install -qq build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev g++ software-properties-common 
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt install python2.7 -y
-RUN npm install -g windows-build-tools
 RUN npm config set python python2.7
-RUN npm config set msvs_version 2019
 RUN npm install -g node-gyp
 RUN npm i -g node-pre-gyp
 RUN npm install node-libcurl --build-from-source
