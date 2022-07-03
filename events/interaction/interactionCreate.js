@@ -1,5 +1,6 @@
-const { Client, CommandInteraction, MessageEmbed } = require("discord.js");
-const { HaveRoleId, RuleRoleId, WelcomeChannelId } = require("../../structures/config/config.json");
+const { CommandInteraction, MessageEmbed } = require("discord.js");
+const User = require("../../src/schemas/userDB");
+const { HaveRoleId, RuleRoleId, WelcomeChannelId } = require("../../src/config/config.json");
 
 module.exports = {
     name: "interactionCreate",
@@ -22,8 +23,27 @@ module.exports = {
                 return interaction.reply({ content: `You do not have the required permission for this command: \`${interaction.commandName}\`.`, ephemeral: true })
             }
 
-            command.execute(interaction, client);
-            console.log(`${interaction.user.tag} in channel #${interaction.channel.name} triggered an interaction "/${interaction.commandName}".`)
+                        if (command) {
+                            let user = client.userSettings.get(interaction.user.id);
+                            // If there is no user, create it in the Database as "newUser"
+                            if (!user) {
+                              const findUser = await User.findOne({ Id: interaction.user.id });
+                              if (!findUser) {
+                                const newUser = await User.create({ Id: interaction.user.id });
+                                client.userSettings.set(interaction.user.id, newUser);
+                                user = newUser;
+                              } else return;
+                            }
+                          
+                            if (command.premium && user && !user.isPremium) {
+                             return interaction.reply(`You are not premium user`);
+                            } else {
+                              return await command.execute( interaction, client );
+                            }
+                        }
+
+            //command.execute(interaction, client);
+            //console.log(`${interaction.user.tag} in channel #${interaction.channel.name} triggered an interaction "/${interaction.commandName}".`)
         }
     }
 }

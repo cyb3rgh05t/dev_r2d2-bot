@@ -1,6 +1,7 @@
 const { Client } = require("discord.js");
 const mongoose = require("mongoose");
-const { DatabaseUrl, Token, ClientId, Prefix } = require("../../structures/config/config.json");
+const User = require("../../src/schemas/userDB");
+const { DatabaseUrl, Token, ClientId, Prefix } = require("../../src/config/config.json");
 
 module.exports = {
     name: "ready",
@@ -9,21 +10,21 @@ module.exports = {
      * 
      * @param {Client} client 
      */
-    execute(client) {
-        console.log(`----`);
-        console.log(`🟧 Starting Client ....`);
-        console.log(`🟧 Getting Client Token ....`);
-        console.log(`----`);
-        console.log(`✅ Client Token = "${Token}"`);
-        console.log(`----`);
-        console.log(`🟧 Getting Client App ID ....`);
-        console.log(`----`);
-        console.log(`✅ Client App ID = "${ClientId}"`);
-        console.log(`----`);
-        console.log(`🟧 Getting Client Prefix ....`);
-        console.log(`----`);
+     async execute(client) {
+        //console.log(`----`);
+        //console.log(`🟧 Starting Client ....`);
+        //console.log(`🟧 Getting Client Token ....`);
+        //console.log(`----`);
+        //console.log(`✅ Client Token = "${Token}"`);
+        //console.log(`----`);
+        //console.log(`🟧 Getting Client App ID ....`);
+        //console.log(`----`);
+        //console.log(`✅ Client App ID = "${ClientId}"`);
+        //console.log(`----`);
+        //console.log(`🟧 Getting Client Prefix ....`);
+        //console.log(`----`);
         console.log(`✅ Client Prefix = "${Prefix}"`);
-        console.log(`----`);
+        //console.log(`----`);
         console.log("✅ Client is now ready and online!")
         client.user.setActivity("IN DEV.", {type: "WATCHING"})
 
@@ -36,5 +37,12 @@ module.exports = {
         }).catch((err) => {
             console.log(err)
         });
+
+        const users = await User.find();
+        for (let user of users) {
+          client.userSettings.set(user.Id, user);
+        }
+
+        require('../../src/handlers/premium')(client)
     }
 }

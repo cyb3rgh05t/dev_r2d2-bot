@@ -1,4 +1,4 @@
-const { Prefix } = require("../../structures/config/config.json");
+const { Prefix } = require("../../src/config/config.json");
 
 module.exports = {
     name: "messageCreate",
