@@ -78,7 +78,7 @@ module.exports = {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             }).then(() => {
-                console.log(`${chalk.yellow("[INFO] ")}Connected To Database!`);
+                console.log(`${chalk.yellow("[INFO] ")}Connected to MongoDB Database!`);
             }).catch((err) => {
                 console.log(err)
             });
