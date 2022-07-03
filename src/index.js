@@ -5,6 +5,7 @@ const { promisify } = require("util");
 const { glob } = require("glob");
 const PG = promisify(glob);
 const Ascii = require("ascii-table")
+const chalk = require("chalk");
 //const path = require("path");
 //require('dotenv').config({ path: path.join(__dirname, `./config/.env`)});
 
@@ -20,7 +21,7 @@ client.userSettings = new Collection();
 });
 
 client.login(Token).then(() => {
-    console.log(`✅ Client logged in as "${client.user.tag}"`);
+    console.log(`${chalk.yellow("[INFO] ")}Logged In as ` + client.user.tag);
 }).catch((err) => {
     console.log(err)
 });

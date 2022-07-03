@@ -63,7 +63,7 @@ module.exports = {
       embed.setTitle("Available Commands");
       embed.setColor("#0099ff");
       embed.setDescription(
-        client.commands.map((cmd) => `\`/${cmd.name}\`\n\n`).join(" ")
+        client.commands.map((cmd) => `\`/${cmd.name}\``).join(" ")
       );
       embed.setFooter({
         text: `${client.commands.size} commands`,
