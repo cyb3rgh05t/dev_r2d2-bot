@@ -1,8 +1,10 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "userinfo",
+    name: "user-info",
     description: "Displays the userinfo of the specified target.",
+    usage: "/user-info [target]",
+    permission: "ADMINISTRATOR",
     options: [
         {
             name: "target",

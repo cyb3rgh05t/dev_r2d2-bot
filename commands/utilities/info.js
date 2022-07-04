@@ -8,9 +8,9 @@ const { CommandInteraction, MessageEmbed, MessageAttachment } = require("discord
  
  module.exports = {
     name: "info",
-    usage: "/info",
+    usage: "/info [user] or [server] or [channel]",
     description: "Returns Info Based On The Command",
-    permission: "SEND_MESSAGES",
+    permission: "ADMINISTRATOR",
     options: [
         {
             name: "user",

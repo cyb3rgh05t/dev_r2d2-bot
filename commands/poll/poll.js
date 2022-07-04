@@ -4,6 +4,8 @@ const DB = require("../../src/schemas/pollDB");
 module.exports = {
     name: "poll",
     description: "Create or manage a poll",
+    usage: "/poll [command]",
+    permission: "ADMINISTRATOR",
     options: [
         {
             name: "create",

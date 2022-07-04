@@ -5,9 +5,9 @@ require('dotenv').config({ path: path.join(__dirname, `../../src/config/.env`)})
 
 
 module.exports = {
-    name: "premiumlist",
+    name: "premium-list",
     description: "Shows a list of all premium users",
-    usage: "/premiumlist [target]",
+    usage: "/premium-list [target]",
     /**
      * @param {CommandInteraction} interaction 
      * @param {Client} client

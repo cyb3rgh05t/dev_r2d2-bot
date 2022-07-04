@@ -9,6 +9,8 @@ const {
 module.exports = {
     name: "gencode",
     description: `gen premium codes`,
+    usage: "/gencode [plan] [amount]",
+    permission: "ADMINISTRATOR",
     options: [
         {
           name: "plan",

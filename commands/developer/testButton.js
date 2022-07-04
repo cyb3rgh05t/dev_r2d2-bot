@@ -3,6 +3,7 @@ const { MessageActionRow, MessageButton } = require("discord.js");
 module.exports = {
     name: "testbutton",
     description: "test the button handler",
+    usage: "/testbutton",
     execute(interaction) {
 
         const row = new MessageActionRow();

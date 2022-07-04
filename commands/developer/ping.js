@@ -3,6 +3,7 @@ const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 module.exports = {
     name: "ping",
     description: "Sends the client's ping",
+    usage: "/ping",
     permission: "ADMINISTRATOR",
     cooldown: 5,
     /**

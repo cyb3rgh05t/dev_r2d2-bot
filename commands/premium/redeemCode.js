@@ -8,7 +8,8 @@ const {
 
 module.exports = {
     name: "redeem",
-    description: `redeem preium code`,
+    description: `redeem a premium code`,
+    usage: "/redeem [code]",
     options: [
         {
         name: "code",

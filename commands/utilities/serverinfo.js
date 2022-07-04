@@ -1,8 +1,10 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "serverinfo",
-    description: "Serverinfo",
+    name: "server-info",
+    description: "Get info about the server",
+    usage: "/server-info [command]",
+    permission: "ADMINISTRATOR",
     /**
      * 
      * @param {CommandInteraction} interaction

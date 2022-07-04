@@ -11,8 +11,9 @@ function fetch(channel, msg) {
 }
 
 module.exports = {
-  name: "embedbuttons",
+  name: "embed-buttons",
   description: "Create a custom message embed",
+  usage: "/embed-bttons [action] [channel] [message-id]",
   permission: "MANAGE_MESSAGES",
   options: [
     {

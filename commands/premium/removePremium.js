@@ -4,9 +4,10 @@ const path = require("path");
 require('dotenv').config({ path: path.join(__dirname, `../../src/config/.env`)});
 
 module.exports = {
-    name: "removepremium",
+    name: "remove-premium",
     description: "removes premium from a user",
-    usage: "/removepremium [user]",
+    usage: "/remove-premium [user]",
+    permission: "ADMINISTRATOR",
     options: [
         {
           name: "user",
