@@ -1,12 +1,12 @@
 const { Client } = require("discord.js");
 const mongoose = require("mongoose");
-//const { DatabaseUrl, Token, ClientId, Prefix } = require("../../src/config/config.json");
 const path = require("path");
 require('dotenv').config({ path: path.join(__dirname, `../../src/config/.env`)});
 const os = require("os");
 const osUtils = require("os-utils");
 const chalk = require("chalk");
 const ms = require("ms");
+const colors = require("colors")
 const User = require("../../src/schemas/userDB");
 const DB = require('../../src/schemas/clientDB');
 
@@ -38,8 +38,9 @@ module.exports = {
      * @param {Client} client
      */
    async execute(client) {
-        console.log(`${chalk.yellow("[INFO] ")}Client Prefix = "${process.env.PREFIX}"`);
-        console.log(`${chalk.yellow("[INFO] ")}Client is now ready and online!`)
+        //console.log(`${chalk.yellow("[INFO] ")}Client Prefix = "${process.env.PREFIX}"`);
+        console.log(`${chalk.yellow("[INFO] ")}Client is now ready and online!`);
+        
         
 
         // Client Activity
