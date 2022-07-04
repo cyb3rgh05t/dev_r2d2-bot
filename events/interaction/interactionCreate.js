@@ -1,6 +1,5 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const User = require("../../src/schemas/userDB");
-const { HaveRoleId, RuleRoleId, WelcomeChannelId } = require("../../src/config/config.json");
 
 module.exports = {
     name: "interactionCreate",

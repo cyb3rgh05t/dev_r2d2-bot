@@ -1,13 +1,13 @@
 const { Client, Collection } = require("discord.js");
 const client = new Client({intents: 131071});
-const { Token } = require("./config/config.json");
+//const { Token } = require("./config/config.json");
 const { promisify } = require("util");
 const { glob } = require("glob");
 const PG = promisify(glob);
 const Ascii = require("ascii-table")
 const chalk = require("chalk");
-//const path = require("path");
-//require('dotenv').config({ path: path.join(__dirname, `./config/.env`)});
+const path = require("path");
+require('dotenv').config({ path: path.join(__dirname, `./config/.env`)});
 
 client.tools = require("./console/errorEmbed");
 client.commands = new Collection();
@@ -20,7 +20,7 @@ client.userSettings = new Collection();
     require(`./handlers/${handler}`)(client, PG, Ascii)
 });
 
-client.login(Token).then(() => {
+client.login(process.env.TOKEN).then(() => {
     console.log(`${chalk.yellow("[INFO] ")}Logged in as ` + client.user.tag);
 }).catch((err) => {
     console.log(err)

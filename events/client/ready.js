@@ -1,6 +1,8 @@
 const { Client } = require("discord.js");
 const mongoose = require("mongoose");
-const { DatabaseUrl, Token, ClientId, Prefix } = require("../../src/config/config.json");
+//const { DatabaseUrl, Token, ClientId, Prefix } = require("../../src/config/config.json");
+const path = require("path");
+require('dotenv').config({ path: path.join(__dirname, `../../src/config/.env`)});
 const os = require("os");
 const osUtils = require("os-utils");
 const chalk = require("chalk");
@@ -36,7 +38,7 @@ module.exports = {
      * @param {Client} client
      */
    async execute(client) {
-        console.log(`${chalk.yellow("[INFO] ")}Client Prefix = "${Prefix}"`);
+        console.log(`${chalk.yellow("[INFO] ")}Client Prefix = "${process.env.PREFIX}"`);
         console.log(`${chalk.yellow("[INFO] ")}Client is now ready and online!`)
         
 
@@ -73,8 +75,8 @@ module.exports = {
 
 
         // Initializing Database Connection 
-            if(!DatabaseUrl) return;
-            mongoose.connect(DatabaseUrl, {
+            if(!process.env.DATABASE_URL) return;
+            mongoose.connect(process.env.DATABASE_URL, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             }).then(() => {

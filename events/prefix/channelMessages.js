@@ -1,4 +1,5 @@
-const { Prefix } = require("../../src/config/config.json");
+const path = require("path");
+require('dotenv').config({ path: path.join(__dirname, `../../src/config/.env`)});
 
 module.exports = {
     name: "messageCreate",
@@ -7,7 +8,7 @@ module.exports = {
      * @param {MessageCreate} message
      */
      async execute(message) {
-        const prefix = Prefix;
+        const prefix = process.env.PREFIX;
         if (!message.content.startsWith(prefix) || message.author.bot) return;
          
          if (message.content.startsWith(`${prefix}donatemessage`)) {

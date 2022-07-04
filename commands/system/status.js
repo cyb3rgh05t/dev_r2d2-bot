@@ -1,7 +1,6 @@
 const { CommandInteraction, Client, MessageEmbed, MessageAttachment } = require("discord.js")
 const { connection } = require("mongoose");
 const { execute } = require("../../events/client/ready");
-
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 const DB = require('../../src/schemas/clientDB');
 const moment = require("moment");

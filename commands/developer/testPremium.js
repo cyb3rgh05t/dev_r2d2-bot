@@ -2,7 +2,8 @@ const { MessageActionRow, MessageButton } = require("discord.js");
 
 module.exports = {
     name: "testpremium",
-    description: "WHATEVER",
+    description: "Test the Premium command",
+    usage: "/testpremium",
     premium: true,
     execute(interaction) {
 

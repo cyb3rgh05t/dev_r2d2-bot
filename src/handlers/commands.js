@@ -1,6 +1,8 @@
 const { Perms } = require("../validation/permissions");
 const { Client } = require("discord.js");
-const { GuildId } = require("../config/config.json");
+//const { GuildId } = require("../config/config.json");
+const path = require("path");
+require('dotenv').config({ path: path.join(__dirname, `../config/.env`)});
 
 /**
  * 
@@ -39,7 +41,7 @@ module.exports = async(client, PG, Ascii) => {
     // PERMISSION CHECK //
 
     client.on('ready', async () => {
-        const mainGuild = await client.guilds.cache.get(GuildId);
+        const mainGuild = await client.guilds.cache.get(process.env.GUILD_ID);
         mainGuild.commands.set(CommandsArray);
     });
 

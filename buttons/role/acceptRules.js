@@ -1,11 +1,13 @@
-const { RuleRoleId, HaveRoleId, WelcomeChannelId } = require("../../src/config/config.json");
+const path = require("path");
+require('dotenv').config({ path: path.join(__dirname, `../../src/config/.env`)});
+
 
 module.exports = {
     id: "acceptRole",
     async execute(interaction) {
         const member = interaction.member; // get member from the interaction - person who clicked the button
     
-                if (member.roles.cache.has(RuleRoleId) || member.roles.cache.has(HaveRoleId)) { // if they already have the role
+                if (member.roles.cache.has(process.env.RULE_ROLE_ID) || member.roles.cache.has(process.env.HAVE_ROLE_ID)) { // if they already have the role
                    // member.roles.remove(process.env.RULE_ROLE_ID); // remove it
                     const message = await interaction.reply({
                         content: 'Du hast die Regeln schon bestätigt!!',
@@ -15,7 +17,7 @@ module.exports = {
                 } else { // if they don't have the role
                     const { guild } = interaction.message //store the guild of the reaction in variable
                     const member = interaction.member;
-                    const welcomeChannel = member.guild.channels.cache.get(WelcomeChannelId);
+                    const welcomeChannel = member.guild.channels.cache.get(process.env.WELCOME_CHANNEL_ID);
                     const welcomeMessage =`Hey ${member}, willkommen in der Community 😀\nSchau dir den <#825364230827409479> Channel an und befolge die Schritte wenn du Zutritt zum Server willst!`;
                     welcomeChannel.send(welcomeMessage);
                     console.log(`Welcome message for "${member.user.username}" was send to the #general channel!`);
