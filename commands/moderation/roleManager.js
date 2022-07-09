@@ -28,7 +28,7 @@ module.exports = {
         const target      = options.getMember("target") || interaction.member;
         const embed       = new MessageEmbed()
                             .setColor(`#${interaction.guild.roles.cache.get(role.id).color.toString(16)}`)
-                            .setTitle("🎭 Role Management 🎭");
+                            .setTitle("👥 Role Management 👥");
 
         console.log(interaction.member.roles.highest.position);
 

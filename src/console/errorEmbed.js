@@ -4,6 +4,6 @@ module.exports.error = function (interaction, message, error) {
     const embed = new MessageEmbed().setColor("DARK_RED").setDescription(`**${error}**`);
     // ternary operator for message
     return message
-      ? interaction.editReply({ embeds: [embed] }).then(() => setTimeout(() => message.delete(), 1000))
+      ? interaction.editReply({ embeds: [embed] }).then(() => setTimeout(() => message.delete(), 3000))
       : interaction.reply({ embeds: [embed] });
   };

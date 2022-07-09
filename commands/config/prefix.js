@@ -1,6 +1,6 @@
 const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
-const GuildSettings = require("../../src/schemas/settingsDB.js");
-const chalk = require("chalk");
+const GuildSettings = require("../../src/schemas/settingsDB");
+const colors = require("colors");
 
 module.exports = {
 	name: "prefix",
@@ -46,15 +46,15 @@ module.exports = {
 			interaction.reply({
 				embeds: [new MessageEmbed()
 					.setTitle("Prefix Changed")
-					.setDescription(`Prefix Changed to : **${caracter[0]}**`)
+					.setDescription(`Prefix changed to : \`${caracter[0]}\``)
 					.setColor("RANDOM")
-					.setFooter("Custom Prefix Was Not So Hard To Make")]
+					.setFooter({text: `Custom Prefix Was Not So Hard To Make`})]
 			})
-			console.log(`${chalk.yellow("[INFO] ")}Client Prefix is now = "${caracter[0]}"`)
+			console.log(`[INFO]`.yellow.bold,`Client Prefix is now = "${caracter[0]}"`)
 
 		} catch (error) {
 			interaction.reply("Some Error Occured");
-			console.log(`${chalk.red("[ERROR] ")}` + error)
+			console.log(`[ERROR]`.red.bold, error)
 		}
 
 	}

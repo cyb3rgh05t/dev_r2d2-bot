@@ -4,6 +4,7 @@ module.exports = {
     name: "testbutton",
     description: "test the button handler",
     usage: "/testbutton",
+    permission: "ADMINISTRATOR",
     execute(interaction) {
 
         const row = new MessageActionRow();

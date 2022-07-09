@@ -1,4 +1,5 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const moment = require("moment");
 
 module.exports = {
     name: "user-info",
@@ -43,8 +44,9 @@ module.exports = {
                 { name: "Roles", value: target.roles.cache.map(r => r).sort((a, b) => b.position - a.position).join(" ").replace("@everyone", "") || "None" },
                 { name: "Nickname", value: target.nickname || "None", inline: true },
                 { name: "Accent Colour", value: target.user.accentColor ? `#${target.user.accentColor.toString(16)}` : "None", inline: true },
-                { name: "Banner", value: target.user.bannerURL() ? "** **" : "None" }
-            );
+                //{ name: "Banner", value: target.user.bannerURL() ? "** **" : "None" }
+            )
+            .setImage(target.user.bannerURL({ dynamic: true, size: 512 }) || "");
 
         interaction.reply({ embeds: [response], ephemeral: true });
     }

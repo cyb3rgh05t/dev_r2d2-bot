@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   id: "CEfooter",
-  permission: ["MANAGE_MESSAGES"],
+  permission: "MANAGE_MESSAGES",
   async execute(interaction, client) {
     const { guild } = interaction;
     const BASE_EMBED = interaction.message.embeds[0];

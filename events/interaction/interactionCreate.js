@@ -1,5 +1,7 @@
+const client = require("../../src/index");
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const User = require("../../src/schemas/userDB");
+const colors = require("colors");
 
 module.exports = {
     name: "interactionCreate",
@@ -16,33 +18,36 @@ module.exports = {
                 new MessageEmbed()
                 .setColor("RED")
                 .setDescription("✖ An error occured while running this command")
-            ]}) && client.commands.delete(interaction.commandName);
+            ], ephemeral: true}) && client.commands.delete(interaction.commandName);
 
             if (command.permission && !interaction.member.permissions.has(command.permission)) {
-                return interaction.reply({ content: `You do not have the required permission for this command: \`${interaction.commandName}\`.`, ephemeral: true })
+              return interaction.reply({ content: `You do not have the required permission for this command: \`${interaction.commandName}\`.`, ephemeral: true })
             }
 
-                        if (command) {
-                            let user = client.userSettings.get(interaction.user.id);
-                            // If there is no user, create it in the Database as "newUser"
-                            if (!user) {
-                              const findUser = await User.findOne({ Id: interaction.user.id });
-                              if (!findUser) {
-                                const newUser = await User.create({ Id: interaction.user.id });
-                                client.userSettings.set(interaction.user.id, newUser);
-                                user = newUser;
-                              } else return;
-                            }
-                          
-                            if (command.premium && user && !user.isPremium) {
-                             return interaction.reply(`You are not premium user`);
-                            } else {
-                              return await command.execute( interaction, client );
-                            }
-                        }
+            const User = require("../../src/schemas/userDB");
 
+            if (command) {
+              let user = client.userSettings.get(interaction.user.id);
+
+              // If there is no user, create it in the Database as "newUser"
+              if (!user) {
+                const findUser = await User.findOne({ Id: interaction.user.id });
+                if (!findUser) {
+                  const newUser = await User.create({ Id: interaction.user.id });
+                  client.userSettings.set(interaction.user.id, newUser);
+                  user = newUser;
+                } else return;
+              }
+                          
+              if (command.premium && user && !user.isPremium) {
+                return interaction.reply(`You are not premium user`);
+              } else {
+                return await command.execute( interaction, client );
+              }
+
+            }                                  
             //command.execute(interaction, client);
-            //console.log(`${interaction.user.tag} in channel #${interaction.channel.name} triggered an interaction "/${interaction.commandName}".`)
+            //console.log(`[INFO]`.yellow.bold,`${interaction.user.tag} in channel #${interaction.channel.name} triggered an interaction "/${interaction.commandName}".`)
         }
     }
 }

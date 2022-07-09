@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Generate Premium Code
 const client = mongoose.Schema({
   Client: {
     type: mongoose.SchemaTypes.Boolean,

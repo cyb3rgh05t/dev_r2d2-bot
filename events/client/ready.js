@@ -1,10 +1,8 @@
 const { Client } = require("discord.js");
 const mongoose = require("mongoose");
-const path = require("path");
-require('dotenv').config({ path: path.join(__dirname, `../../src/config/.env`)});
+const client = require("../../src/index");
 const os = require("os");
 const osUtils = require("os-utils");
-const chalk = require("chalk");
 const ms = require("ms");
 const colors = require("colors")
 const User = require("../../src/schemas/userDB");
@@ -38,11 +36,16 @@ module.exports = {
      * @param {Client} client
      */
    async execute(client) {
+        console.log(`┌─────────────────────────────────────────────────────────────┐`.bold.blue)
+        console.log(`│                                                             │`.bold.blue)
+        console.log(`│                                                             │`.bold.blue)
+        console.log(`│               `.blue.bold,`Logged in as ${client.user.tag}`.green.bold,`                 │`.bold.blue)
+        console.log(`│                                                             │`.bold.blue)
+        console.log(`│                                                             │`.bold.blue)
+        console.log(`└─────────────────────────────────────────────────────────────┘`.bold.blue)
         //console.log(`${chalk.yellow("[INFO] ")}Client Prefix = "${process.env.PREFIX}"`);
-        console.log(`${chalk.yellow("[INFO] ")}Client is now ready and online!`);
+        console.log(`[INFO]`.yellow.bold,`Client is now ready and online!`);
         
-        
-
         // Client Activity
             const initialStatus = setTimeout(() => {
                 client.user.setPresence({
@@ -76,14 +79,14 @@ module.exports = {
 
 
         // Initializing Database Connection 
-            if(!process.env.DATABASE_URL) return;
-            mongoose.connect(process.env.DATABASE_URL, {
+            if(!client.config.DatabaseUrl) return;
+            mongoose.connect(client.config.DatabaseUrl, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             }).then(() => {
-                console.log(`${chalk.yellow("[INFO] ")}Connected to MongoDB Database!`);
+                console.log(`[INFO]`.yellow.bold,`Connected to MongoDB Database!`);
             }).catch((err) => {
-                console.log(err)
+                console.log(`[ERROR]`.red.bold, err)
             });
 
         // Initialising Premium Users

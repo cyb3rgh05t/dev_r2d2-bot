@@ -1,15 +1,14 @@
-const path = require("path");
-require('dotenv').config({ path: path.join(__dirname, `../config/.env`)});
-const { Schema, model } = require("mongoose");
+const client = require("../../src/index");
+const mongoose = require("mongoose");
 
-const schema = new Schema({
+const settings = mongoose.Schema({
   GuildID: {
     type: String,
   },
   Prefix: {
     type: String,
-    default: process.env.PREFIX,
+    default: client.config.Prefix,
   },
 });
 
-module.exports = model("guild_settings", schema);
+module.exports = mongoose.model("guild_settings", settings);

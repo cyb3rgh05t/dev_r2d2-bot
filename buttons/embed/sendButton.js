@@ -6,7 +6,7 @@ const Input = [`**Tag a channel**`, `**Message to send above the embed?\nElse ty
 
 module.exports = {
   id: "CEsend",
-  permission: ["MANAGE_MESSAGES"],
+  permission: "MANAGE_MESSAGES",
   async execute(interaction, client, args) {
     const BASE_EMBED = interaction.message.embeds[0];
     const CUSTOM_EMBED = interaction.message.embeds[1];

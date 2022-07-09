@@ -16,7 +16,7 @@ module.exports = {
             name: "target",
             description: "Select a target to clear their messages.",
             type: "USER",
-            required: true
+            required: false
         }
     ],
     /**

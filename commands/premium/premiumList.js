@@ -1,20 +1,21 @@
 const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 const moment = require("moment");
-const path = require("path");
-require('dotenv').config({ path: path.join(__dirname, `../../src/config/.env`)});
+const { config } = require("../../src/index");
+const client = require("../../src/index");
 
 
 module.exports = {
     name: "premium-list",
     description: "Shows a list of all premium users",
     usage: "/premium-list [target]",
+    permission: "ADMINISTRATOR",
     /**
      * @param {CommandInteraction} interaction 
      * @param {Client} client
      */
     async execute(interaction, client) {
         // Code
-        if (interaction.user.id !== process.env.OWNER_ID) // Change to uyour discord user id
+        if (interaction.user.id !== client.config.OwnerId) // Change to uyour discord user id
         return interaction.reply(`You are not my Owner`);
 
         let data = client.userSettings

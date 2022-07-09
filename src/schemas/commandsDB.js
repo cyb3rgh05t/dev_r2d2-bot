@@ -1,12 +1,14 @@
-const { Schema, model } = require("mongoose");
+const client = require("../index");
+const mongoose = require("mongoose");
 
-const schema = new Schema({
+const commands = mongoose.Schema({
   GuildID: {
     type: String,
   },
+
   cmds: {
     type: Array,
   },
 });
 
-module.exports = model("commands", schema);
+module.exports = mongoose.model("commands", commands);

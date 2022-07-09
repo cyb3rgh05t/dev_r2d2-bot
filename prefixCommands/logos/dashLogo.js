@@ -1,37 +1,23 @@
-const path = require("path");
-require('dotenv').config({ path: path.join(__dirname, `../../src/config/.env`)});
-const GuildSettings = require("../../src/schemas/settingsDB.js");
-const chalk = require("chalk");
+const { Client, Message } = require("discord.js");
+const colors = require("colors");
 
 module.exports = {
-    name: "messageCreate",
+    name: "dash-image",
     description: "dash-image",
+    category: "logos",
+    syntax: "command",
+    permissions: ["ADMINISTRATOR"],
     /**
-     * 
-     * @param {MessageCreate} message
+     * @param {Client} client
+     * @param {Message} message
+     * @param {String[]} args
      */
-     async execute(message) {
+     run: async(client, message, args) => {
       try {
-
-        let storedSettings = await GuildSettings.findOne({ GuildID: message.guild.id });
-        if (!storedSettings) {
-          // If there are no settings stored for this guild, we create them and try to retrive them again.
-          const newSettings = new GuildSettings({ GuildID: message.guild.id, });
-          await newSettings.save().catch((e) => {
-            console.log(e);
-          });
-          storedSettings = await GuildSettings.findOne({ GuildID: message.guild.id });
-        }
-        const prefix = storedSettings.Prefix;
-        if (!message.content.startsWith(prefix) || message.author.bot) return;
-         
-        if (message.content.startsWith(`${prefix}dash-image`)) {
-            message.channel.send({ files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/SNC_Dashboard.png?raw=true"]});
-          }
-       
-       } catch (error) {
-			message.channel.send("Some Error Occured");
-			console.log(`${chalk.red("[ERROR] ")}` + error)
-		}
-  }  
+        message.channel.send({ files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/SNC_Dashboard.png?raw=true"]});
+      } catch (error) {
+			  message.channel.send("Some Error Occured");
+		  	console.log(`[ERROR]`.red.bold, error)
+		    }
+    }  
 }

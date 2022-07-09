@@ -1,9 +1,11 @@
 const { MessageEmbed, CommandInteraction, Client } = require("discord.js");
+const client = require("../../src/index");
 
 module.exports = {
   name: "help",
   description: "shows all available commands",
   usage: "/help [command]",
+  permission: "SEND_MESSAGES",
   options: [
     {
       name: "command",

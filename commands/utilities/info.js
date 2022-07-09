@@ -476,7 +476,7 @@ const { CommandInteraction, MessageEmbed, MessageAttachment } = require("discord
                 break;
             };
         } catch (err) {
-            console.log(err);
+            console.log(`[ERROR]`.red.bold, err);
         };
     },
 }
