@@ -7,18 +7,19 @@ const colors = require("colors");
 module.exports = {
     name: "messageCreate",
 
+
 async execute(message) {
     let storedSettings = await GuildSettings.findOne({
-        GuildID: message.guild.id,
+        GuildID: client.config.GuildId,
       });
       if (!storedSettings) {
         const newSettings = new GuildSettings({
-          GuildID: message.guild.id,
+          GuildID: client.config.GuildId,
         });
         await newSettings.save().catch((e) => {
           console.log(e);
         });
-        storedSettings = await GuildSettings.findOne({ GuildID: message.guild.id });
+        storedSettings = await GuildSettings.findOne({ GuildID: client.config.GuildId });
       }
 
       const prefix = storedSettings.Prefix;
@@ -37,7 +38,7 @@ async execute(message) {
                   .setFooter({text: `Some Error Occured`})
                   .setTitle("Your are not allowed to execute this command")
                   .setDescription("You Should be one of the bot owners to use this command")]
-                }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, "You Are not Allowed to execute this command", 3000)}).catch((e) => {console.log(String(e).grey)});
+                }).then(msg => setTimeout(() => msg.delete(), 5000));
               }
 
             if (cmd.permissions && cmd.permissions.length > 0 && !message.member.permissions.has(cmd.permissions)) {
@@ -46,16 +47,9 @@ async execute(message) {
                     .setFooter({text: `Some Error Occured`})
                     .setTitle("Your are not allowed to execute this command")
                     .setDescription("You Dont Have Enough Permissons to use this command")]
-                }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, "You Are not Allowed to execute this command", 3000)}).catch((e) => {console.log(String(e).grey)});
+                }).then(msg => setTimeout(() => msg.delete(), 5000));
             }
-
-            let check = await GuildCommands.findOne({ GuildID: message.guild.id, })
-          
-            if(check && check.cmds && check.cmds.includes(cmd.name)) {
-              message.channel.send("Command Disabled")
-            } else {
               cmd.run(client, message, args);
-            }
 
         } catch (error) {
           console.log(`[ERROR]`.red.bold, error)

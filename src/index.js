@@ -16,8 +16,6 @@ client.buttons = new Collection();
 client.cooldowns = new Collection();
 client.userSettings = new Collection();
 client.prefixcmd = new Collection();
-client.premium = new Collection();
-
 
 ["events", "commands", "prefixcmd", "buttons"].forEach(handler => {
     require(`./handlers/${handler}`)(client, PG, Ascii)

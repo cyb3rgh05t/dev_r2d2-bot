@@ -43,7 +43,7 @@ module.exports = {
         console.log(`│                                                             │`.bold.blue)
         console.log(`│                                                             │`.bold.blue)
         console.log(`└─────────────────────────────────────────────────────────────┘`.bold.blue)
-        //console.log(`${chalk.yellow("[INFO] ")}Client Prefix = "${process.env.PREFIX}"`);
+        console.log(`[CLIENT READY]`.green.bold)
         console.log(`[INFO]`.yellow.bold,`Client is now ready and online!`);
         
         // Client Activity
@@ -84,6 +84,7 @@ module.exports = {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             }).then(() => {
+                console.log(`[DATABASE READY]`.green.bold)
                 console.log(`[INFO]`.yellow.bold,`Connected to MongoDB Database!`);
             }).catch((err) => {
                 console.log(`[ERROR]`.red.bold, err)

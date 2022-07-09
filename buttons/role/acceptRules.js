@@ -17,7 +17,7 @@ module.exports = {
                     const welcomeChannel = member.guild.channels.cache.get(client.config.WelcomeChannelId);
                     const welcomeMessage =`Hey ${member}, willkommen in der Community 😀\nSchau dir den <#825364230827409479> Channel an und befolge die Schritte wenn du Zutritt zum Server willst!`;
                     welcomeChannel.send(welcomeMessage);
-                    console.log(`Welcome message for "${member.user.username}" was send to the #general channel!`);
+                    console.log(`[INFO]`.yellow.bold,`Welcome message for "${member.user.username}" was send to the #general channel!`);
                     member.roles.add("903678877740716103"); // add it
                     await interaction.reply({
                         content: 'Regeln bestätigt und Rolle wurde hinzugefügt!',
