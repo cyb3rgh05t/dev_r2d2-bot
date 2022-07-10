@@ -1,6 +1,6 @@
 const User = require("../../src/schemas/userDB");
 const { CommandInteraction, MessageEmbed } = require("discord.js");
-const client = require("../../src/index");
+const { ownerId } = require("../../src/config/config.json");
 
 module.exports = {
     name: "remove-premium",
@@ -20,7 +20,7 @@ module.exports = {
      */
     async execute(interaction, client) {
         // Code
-        if (interaction.user.id !== client.config.OwnerId) // Change to uyour discord user id
+        if (interaction.user.id !== ownerId) // Change to uyour discord user id
         return interaction.reply(`You are not my Owner`);
 
         

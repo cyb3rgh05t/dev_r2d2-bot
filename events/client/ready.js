@@ -1,6 +1,6 @@
 const { Client } = require("discord.js");
 const mongoose = require("mongoose");
-const client = require("../../src/index");
+const { databaseUrl } = require("../../src/config/config.json");
 const os = require("os");
 const osUtils = require("os-utils");
 const ms = require("ms");
@@ -79,8 +79,8 @@ module.exports = {
 
 
         // Initializing Database Connection 
-            if(!client.config.DatabaseUrl) return;
-            mongoose.connect(client.config.DatabaseUrl, {
+            if(!databaseUrl) return;
+            mongoose.connect(databaseUrl, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             }).then(() => {

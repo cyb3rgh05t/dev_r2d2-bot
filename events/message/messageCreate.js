@@ -1,7 +1,8 @@
 const client = require('../../src/index');
-const { MessageEmbed } = require("discord.js");
+const { Client, MessageEmbed } = require("discord.js");
 const GuildSettings = require('../../src/schemas/settingsDB');
 const GuildCommands = require('../../src/schemas/commandsDB');
+const { guildId, ownerId } = require("../../src/config/config.json");
 const colors = require("colors");
 
 module.exports = {
@@ -10,16 +11,16 @@ module.exports = {
 
 async execute(message) {
     let storedSettings = await GuildSettings.findOne({
-        GuildID: client.config.GuildId,
+        GuildID: guildId,
       });
       if (!storedSettings) {
         const newSettings = new GuildSettings({
-          GuildID: client.config.GuildId,
+          GuildID: guildId,
         });
         await newSettings.save().catch((e) => {
           console.log(e);
         });
-        storedSettings = await GuildSettings.findOne({ GuildID: client.config.GuildId });
+        storedSettings = await GuildSettings.findOne({ GuildID: guildId });
       }
 
       const prefix = storedSettings.Prefix;
@@ -32,7 +33,7 @@ async execute(message) {
         if (!cmd) return;
         try {
 
-            if (cmd.owner && message.author.id !== client.config.OwnerId) {
+            if (cmd.owner && message.author.id !== ownerId) {
                 return message.reply({embeds: [new MessageEmbed()
                   .setColor("RED")
                   .setFooter({text: `Some Error Occured`})

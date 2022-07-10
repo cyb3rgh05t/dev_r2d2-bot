@@ -1,4 +1,3 @@
-const client = require("../../src/index");
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const User = require("../../src/schemas/userDB");
 const colors = require("colors");

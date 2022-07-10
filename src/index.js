@@ -1,6 +1,8 @@
 const { Client, Collection } = require("discord.js");
 const client = new Client({intents: 131071});
 
+const { token } = require("./config/config.json");
+
 const { promisify } = require("util");
 const { glob } = require("glob");
 const PG = promisify(glob);
@@ -9,7 +11,6 @@ const colors = require("colors");
 
 module.exports = client;
 
-client.config = require("./config/config.json")
 client.tools = require("./console/errorEmbed");
 client.commands = new Collection();
 client.buttons = new Collection();
@@ -22,7 +23,7 @@ client.prefixcmd = new Collection();
 });
 
 
-client.login(client.config.Token).then(() => {
+client.login(token).then(() => {
 }).catch((err) => {
     console.log(`[ERROR]`.red.bold, err)
 });

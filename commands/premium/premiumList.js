@@ -1,7 +1,6 @@
 const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 const moment = require("moment");
-const { config } = require("../../src/index");
-const client = require("../../src/index");
+const { ownerId } = require("../../src/config/config.json");
 
 
 module.exports = {
@@ -15,7 +14,7 @@ module.exports = {
      */
     async execute(interaction, client) {
         // Code
-        if (interaction.user.id !== client.config.OwnerId) // Change to uyour discord user id
+        if (interaction.user.id !== ownerId) // Change to uyour discord user id
         return interaction.reply(`You are not my Owner`);
 
         let data = client.userSettings

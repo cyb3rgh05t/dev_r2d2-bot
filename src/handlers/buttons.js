@@ -1,4 +1,3 @@
-const client = require("../../src/index");
 const colors = require("colors");
 
 module.exports = async (client, PG, Ascii) => {

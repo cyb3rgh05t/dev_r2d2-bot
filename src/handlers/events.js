@@ -1,4 +1,3 @@
-const client = require("../../src/index");
 const { Events } = require("../validation/eventNames");
 const colors = require("colors");
 
