@@ -1,4 +1,3 @@
-const client = require("../../src/index");
 const { ButtonInteraction } = require("discord.js");
 
 module.exports = {
@@ -10,7 +9,11 @@ module.exports = {
      */
     execute(interaction, client) {
         if(!interaction.isButton()) return;
+        
         const Button = client.buttons.get(interaction.customId);
+
+        if(!Button)
+            return;
         
         if(Button.permission && !interaction.member.permissions.has(Button.permission))
         return interaction.reply({ content: `You do not have the required permission for this command: \`${interaction.customId}\`.`, ephemeral: true })

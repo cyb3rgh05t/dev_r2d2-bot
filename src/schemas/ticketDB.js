@@ -1,6 +1,8 @@
 const { model, Schema } = require("mongoose");
 
-module.exports = model("Ticket-System", new Schema({
+module.exports = model(
+    "Tickets", 
+    new Schema({
     GuildID: String,
     MembersID: [String],
     TicketID: String,
@@ -8,8 +10,5 @@ module.exports = model("Ticket-System", new Schema({
     Closed: Boolean,
     Locked: Boolean,
     Type: String,
-    Claimed: Boolean,
-    ClaimedBy: String,
-    CreatedBy: String,
-    Opened: String,
-}))
+    })
+);

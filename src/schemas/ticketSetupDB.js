@@ -1,12 +1,16 @@
 const { model, Schema } = require('mongoose');
 
-module.exports = model("Ticket-Setup", new Schema({
+module.exports = model(
+    "TicketSetup",
+    new Schema({
     GuildID: String,
-    ChannelID: String,
+    Channel: String,
     Category: String,
     Transcripts: String,
     Handlers: String,
     Everyone: String,
     Description: String,
-    IDs: Number
+    Buttons: [String],
+    Claimed: Boolean,
+    ClaimedBy: String,
 }))
