@@ -51,7 +51,7 @@ module.exports = {
                 })
             } else {
                 await channel.bulkDelete(Amount, true).then(messages => {
-                    Response.setDescription(`🧹 Cleard ${messages.size} messagesfrom this channel.`);
+                    Response.setDescription(`🧹 Cleard ${messages.size} messages from this channel.`);
                     interaction.reply({embeds: [Response], fetchReply: true});
                     setTimeout(() => interaction.deleteReply(), 5000);
             })
