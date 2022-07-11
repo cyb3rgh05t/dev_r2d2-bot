@@ -14,7 +14,7 @@ module.exports = {
 
     if (newMember.roles.cache.some(role => role.id === haveRoleId)) {
         newMember.roles.remove(removeRoleId);
-	    console.log(`[ACTION]`.bgBlue, `"${newMember.user.username}" got Streamnet role, please check to send the invitebot`);
+	    //console.log(`[ACTION]`.bgBlue, `"${newMember.user.username}" got Streamnet role, please check to send the invitebot`);
         }
     }
 }
