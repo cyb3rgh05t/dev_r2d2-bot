@@ -1,5 +1,10 @@
+#node.js
 node_modules
+
+#settings
 .env
 config.json
+
+#Visual Studio Code
 .vs
 .vscode
