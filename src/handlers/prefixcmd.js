@@ -1,4 +1,3 @@
-//const client = require("../index");
 const colors = require("colors");
 const GuildSettings = require("../schemas/commandsDB.js");
 
