@@ -25,7 +25,7 @@ module.exports = {
 
         if(!member.roles.cache.find((r) => r.id === TicketSetup.Handlers ))
         return interaction.reply({ 
-            content: "You cannot use these Buttons!",
+            content: "Nur für Staff Mitglieder!",
         ephemeral: true,
     });
 

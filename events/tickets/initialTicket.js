@@ -49,9 +49,9 @@ module.exports = {
                     name: `${guild.name} | Ticket ID: ${ID}`, 
                     iconURL: `${guild.iconURL({dynamic: true})}`
                 })
-                .setDescription(`Ticket Opened by <@${interaction.user.id}>\n\nPlease wait patiently for a response from the Staff team, in the meanwhile, please describe your issue or report in as much detail as possible.`)
+                .setDescription(`Ticket erstellt von <@${interaction.user.id}>\n\nBitte warte geduldig auf eine Antwort des Staff Teams. Beschreibe in der Zwischenzeit bitte deine Anfrage oder dein Problem so detailliert wie möglich.`)
                 .setFooter({
-                    text: `The Buttons below are Staff Only Buttons!`
+                    text: `Buttons sind nur für Staff Team!`
                 })
 
             const Buttons = new MessageActionRow();
@@ -84,7 +84,7 @@ module.exports = {
                 });
 
                 await channel
-                    .send({content: `${member} here is your ticket` })
+                    .send({content: `${member} hier ist dein Ticket` })
                     .then((m) => {
                         setTimeout(() => {
                             m.delete().catch(() => {});
@@ -92,7 +92,7 @@ module.exports = {
                     });
 
                 interaction.reply({
-                    content: `${member} your ticket has been created: ${channel}`,
+                    content: `${member} Dein Ticket wurde erstellt: ${channel}`,
                     ephemeral: true,
                 });  
         });   
