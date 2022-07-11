@@ -36,13 +36,14 @@ module.exports = {
      * @param {Client} client
      */
    async execute(client) {
-        console.log(`┌─────────────────────────────────────────────────────────────┐`.bold.blue)
+        /*console.log(`┌─────────────────────────────────────────────────────────────┐`.bold.blue)
         console.log(`│                                                             │`.bold.blue)
         console.log(`│                                                             │`.bold.blue)
         console.log(`│               `.blue.bold,`Logged in as ${client.user.tag}`.green.bold,`                 │`.bold.blue)
         console.log(`│                                                             │`.bold.blue)
         console.log(`│                                                             │`.bold.blue)
-        console.log(`└─────────────────────────────────────────────────────────────┘`.bold.blue)
+        console.log(`└─────────────────────────────────────────────────────────────┘`.bold.blue)*/
+        console.log(`Logged in as ${client.user.tag}`.green.bold)
         console.log(`[CLIENT READY]`.green.bold)
         console.log(`[INFO]`.yellow.bold,`Client is now ready and online!`);
         
