@@ -55,6 +55,15 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
+      
+      - uses: actions/delete-package-versions@v2
+        with: 
+           owner: 'cyb3rgh05t'
+           repo: 'packages'
+           package-name: 'dev_r2d2-bot'
+           token: ${{ secrets.CR_PAT }}
+           min-versions-to-keep: 10
+           delete-only-pre-release-versions: "false"
 
       - name: Build and push GHRC.io
         id: docker_build
