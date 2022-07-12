@@ -9,7 +9,7 @@ module.exports = {
             name: "play",
             description: "Play a song ",
             type: "SUB_COMMAND",
-            options: [{ name: "query", description: "Provide a name or a url the song", type: "STRING", required: true}]
+            options: [{ name: "query", description: "Provide a song NAME or a song URL", type: "STRING", required: true}]
         },
         {
             name: "volume",
@@ -23,11 +23,15 @@ module.exports = {
             type: "SUB_COMMAND",
             options: [{ name: "options", description: "select an option ", type: "STRING", required: true,
             choices: [
-                { name: "queue", value: "queue" },
-                { name: "skip", value: "skip" },
-                { name: "pause", value: "pause" },
-                { name: "resume", value: "resume" },
-                { name: "stop", value: "stop" },
+                { name: "🔢 View Queue", value: "queue" },
+                { name: "⏭ Skip Song", value: "skip" },
+                { name: "⏸ Pause Song", value: "pause" },
+                { name: "⏯️ Resume Song", value: "resume" },
+                { name: "⏹ Stop Music", value: "stop" },
+                { name: "🔀 Shuffle Queue", value: "shuffle" },
+                { name: "🔃 Toggle Autoplay Modes", value: "AutoPlay" },
+                { name: "🈁 Add a related Song", value: "RelatedSong" },
+                { name: "🔁 Toggle Repeat Mode", value: "RepeatMode" },
             ]}]
         }   
     ] ,
@@ -64,21 +68,41 @@ module.exports = {
                     const queue = await client.distube.getQueue(VoiceChannel);
 
                     if(!queue)
-                    return interaction.reply({content: "⛔ There is no queue ."});
+                    return interaction.reply({content: "⛔ There is no queue."});
 
                     switch(options.getString("options")) {
                         case "skip" : 
                         await queue.skip(VoiceChannel);
-                        return interaction.reply({content: "⏭ Song has been skipped ."})
+                        return interaction.reply({content: "⏭ Song has been skipped."});
+
                         case "stop" :
                         await queue.stop(VoiceChannel);
-                        return interaction.reply({content: "⏹ Music has been stopped ."})
+                        return interaction.reply({content: "⏹ Music has been stopped."});
+
                         case "pause" :
                         await queue.pause(VoiceChannel);
-                        return interaction.reply({content: "⏸ Song has been paused ."})
+                        return interaction.reply({content: "⏸ Song has been paused."});
+
                         case "resume" :
                         await queue.resume(VoiceChannel);
-                        return interaction.reply({content: "⏯ Song has been resumed ."})
+                        return interaction.reply({content: "⏯️ Song has been resumed."});
+
+                        case "shuffle" :
+                        await queue.shuffle(VoiceChannel);
+                        return interaction.reply({content: "🔀 The queue has been shuffeled."});
+
+                        case "AutoPlay" :
+                        let Mode = await queue.toggleAutoplay(VoiceChannel);
+                        return interaction.reply({content: `🔃 AutoPlay Mode is set to: ${Mode ? "On" : "Off"}`});
+
+                        case "RelatedSong" :
+                        await queue.addRelatedSong(VoiceChannel);
+                        return interaction.reply({content: "🈁 A related Song has been add to the queue."});
+
+                        case "AutoPlay" :
+                        let Mode2 = await client.distube.setRepeatMode(queue);
+                        return interaction.reply({content: `🔁 Repeat Mode is set to: ${Mode2 = Mode2 ? Mode2 == 2 ? "Queue" : "Song" : "Off"}`});
+
                         case "queue" :
                         return interaction.reply({embeds: [new MessageEmbed()
                         .setColor('PURPLE')
