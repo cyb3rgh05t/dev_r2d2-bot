@@ -110,8 +110,10 @@ module.exports = {
                     winnerCount,
                     prize,
                     messages : {
-                        giveaway: '🎉🎉 **GIVEAWAY** 🎉🎉',
-                        giveawayEnded: '🎉🎉 **GIVEAWAY BEENDED** 🎉🎉',
+                        giveaway: '<:streamnet:855771751820296232>🎉 **GIVEAWAY** 🎉<:streamnet:855771751820296232>',
+                        giveawayEnded: '<:streamnet:855771751820296232>🎉 **GIVEAWAY BEENDED** 🎉<:streamnet:855771751820296232>',
+                        inviteToParticipate: "Reagiere mit <:streamnet:855771751820296232> um teilzunehmen!",
+                        dropMessage: "Sei der erste der mit <:streamnet:855771751820296232> reagiert!",
                         winMessage: 'Herzlichen Glückwunsch, {winners}! Du hast **{this.prize}** gewonnen!',
                     }
                 }).then(async () => {

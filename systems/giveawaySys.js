@@ -24,11 +24,12 @@ const GiveawayManagerWithOwnDatabase = class extends GiveawaysManager {
 };
 
 const manager = new GiveawayManagerWithOwnDatabase(client, {
+    storage: '../src/config/giveaway.json',
     default: {
         botsCanWin: false,
         embedColor: '#FF0000',
         embedColorEnd: '#000000',
-        reaction: '🎉'
+        reaction: '<:streamnet:855771751820296232>'
     }
 });
 client.giveawaysManager = manager;
