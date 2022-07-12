@@ -17,7 +17,7 @@ jobs:
         uses: actions/delete-package-versions@v2.0.1
         with: 
            owner: 'cyb3rgh05t'
-           repo: 'packages'
+           repo: 'dev_r2d2-bot'
            package-name: 'dev_r2d2-bot'
            token: ${{ secrets.CR_PAT }}
            min-versions-to-keep: 10
