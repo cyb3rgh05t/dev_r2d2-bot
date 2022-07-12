@@ -143,7 +143,7 @@ module.exports = {
                         client.giveawaysManager
                         .end(messageId)
                         .then(() => {
-                            successEmbed.setDescription("Giveaway has been ended.");
+                            successEmbed.setDescription("Giveaway wurde beendet.");
                             return interaction.reply({embeds: [successEmbed], ephemeral: true})
                         })
                         .catch((err) => {
@@ -157,7 +157,7 @@ module.exports = {
                         client.giveawaysManager
                         .paused(messageId)
                         .then(() => {
-                            successEmbed.setDescription("Giveaway has been paused.");
+                            successEmbed.setDescription("Giveaway wurde pausiert.");
                             return interaction.reply({embeds: [successEmbed], ephemeral: true})
                         })
                         .catch((err) => {
@@ -172,7 +172,7 @@ module.exports = {
                         client.giveawaysManager
                         .unpaused(messageId)
                         .then(() => {
-                            successEmbed.setDescription("Giveaway has been unpaused.");
+                            successEmbed.setDescription("Giveaway wurde wieder gestartet.");
                             return interaction.reply({embeds: [successEmbed], ephemeral: true})
                         })
                         .catch((err) => {
