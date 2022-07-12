@@ -9,7 +9,17 @@ const PG = promisify(glob);
 const Ascii = require("ascii-table")
 const colors = require("colors");
 
-module.exports = client;
+const { DisTube } = require('distube');
+const { SpotifyPlugin } = require('@distube/spotify');
+
+client.distube = new DisTube(client, {
+    youtubeDL: false,
+    emitNewSongOnly: true,
+    leaveOnFinish: true,
+    emitAddSongWhenCreatingQueue: false,
+    plugins: [new SpotifyPlugin()]
+});
+
 
 client.tools = require("./console/errorEmbed");
 client.commands = new Collection();
@@ -17,6 +27,8 @@ client.buttons = new Collection();
 client.cooldowns = new Collection();
 client.userSettings = new Collection();
 client.prefixcmd = new Collection();
+
+module.exports = client;
 
 ["events", "commands", "prefixcmd", "buttons"].forEach(handler => {
     require(`./handlers/${handler}`)(client, PG, Ascii)
