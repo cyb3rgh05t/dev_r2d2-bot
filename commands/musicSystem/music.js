@@ -9,7 +9,7 @@ module.exports = {
             name: "play",
             description: "Play a song ",
             type: "SUB_COMMAND",
-            option: [{ name: "query", description: "Provide a name or a url the song", type: "STRING", required: true}]
+            options: [{ name: "query", description: "Provide a name or a url the song", type: "STRING", required: true}]
         },
         {
             name: "volume",
@@ -49,7 +49,7 @@ module.exports = {
         try {
             switch(options.getSubcommand()) {
                 case "play" : {
-                    client.distube.playVoiceChannel( VoiceChannel, options.getString("query"), { textChannel: channel, member: member });
+                    client.distube.play( VoiceChannel, options.getString("query"), { textChannel: channel, member: member });
                     return interaction.reply({content: "🎼 Request recieved ."});
                 }
                 case "volume" : {
