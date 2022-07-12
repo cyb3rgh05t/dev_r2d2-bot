@@ -42,6 +42,8 @@ module.exports = {
                 Locked: false,
                 Type: customId,
                 Claimed: false,
+                CreatedBy: member.id,
+                Opened: parseInt(Date.now() / 1000)
             });
 
             const Embed = new MessageEmbed()

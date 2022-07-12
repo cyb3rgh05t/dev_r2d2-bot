@@ -35,18 +35,18 @@ module.exports = {
             if (err) throw err;
             if (!docs)
                 return interaction.reply({
-                    content: "No Data was found related to this ticket, please delete manual.",
+                    content: "Zu diesem Ticket wurden keine Daten gefunden, bitte manuell löschen.",
                     ephemeral: true,
                 });
             switch (customId) {
                 case "lock":
                     if(docs.Locked == true)
                         return interaction.reply({
-                            content: "The Ticket is already locked",
+                            content: "Das Ticket ist bereits gesperrt",
                             ephemeral: true,
                         });
                     await DB.updateOne({ ChannelID: channel.id}, { Locked: true});
-                    Embed.setDescription("🔐 | This Ticket is now locked for reviewing.")
+                    Embed.setDescription("🔐 | Dieses Ticket ist jetzt zur Überprüfung gesperrt.")
 
                     docs.MembersID.forEach((m) => {
                         channel.permissionOverwrites.edit(m, {
@@ -59,11 +59,11 @@ module.exports = {
                 case "unlock":
                     if(docs.Locked == false)
                         return interaction.reply({
-                            content: "The Ticket is already unlocked",
+                            content: "Das Ticket ist bereits freigeschaltet",
                             ephemeral: true,
                         });
                     await DB.updateOne({ ChannelID: channel.id}, { Locked: true});
-                    Embed.setDescription("🔓 | This Ticket is now unlocked.")
+                    Embed.setDescription("🔓 | Dieses Ticket ist jetzt freigeschaltet.")
                     docs.MembersID.forEach((m) => {
                         channel.permissionOverwrites.edit(m, {
                             SEND_MESSAGES: true,
@@ -74,7 +74,7 @@ module.exports = {
                 case "close":
                     if(docs.Closed == true)
                         return interaction.reply({
-                            content: "The Ticket is already closed, please wait for it to get deleted.",
+                            content: "Das Ticket ist bereits geschlossen, bitte warte, bis es gelöscht wird.",
                             ephemeral: true,
                         });
                 const attachment = await createTranscript(channel, {
@@ -88,17 +88,20 @@ module.exports = {
                 .get(TicketSetup.Transcripts)
                 .send({
                     embeds: [
-                        Embed.setTitle(
-                            `Transcipt Type: ${docs.Type}\nID: ${docs.TicketID}`
-                            ),
+                        Embed.setTitle(`Ticket ID: ${docs.TicketID}`)
+                        .setDescription(`Closed By: ${member.user.tag}\nMember: <@${docs.CreatedBy}>`)
+                        //.addField(`The Transcript is now saved [TRANSCRIPT](${Message.url})`)
+                        .setThumbnail(`${interaction.guild.iconURL({dynamic: true})}`)
+                        .setTimestamp(),
                     ],
                     files: [attachment],
                 });
 
                 interaction.reply({
                     embeds: [
-                        Embed.setDescription(
-                            `The Transcript is now saved [TRANSCRIPT](${Message.url})`
+                        Embed
+                        .setDescription(
+                            `Das Transcript wurde gespeichert [TRANSCRIPT](${Message.url})`
                         ),
                     ],
                 });
@@ -110,7 +113,7 @@ module.exports = {
                 case "claim":
                     if (docs.Claimed == true)
                     return interaction.reply({
-                        content: `This ticket has already been claimed by <@${docs.ClaimedBy}>`,
+                        content: `Dieses Ticket wurde bereits von <@${docs.ClaimedBy}> beansprucht.`,
                         ephemeral: true,
                     });
 
@@ -119,7 +122,7 @@ module.exports = {
                         {Claimed: true, ClaimedBy: member.id}
                     );
 
-                    Embed.setDescription(`📰 | This ticket is now claimed by ${member}`);
+                    Embed.setDescription(`📰 | Dieses Ticket wird jetzt von ${member} beansprucht`);
                     interaction.reply({ embeds: [Embed] });
 
                     break;

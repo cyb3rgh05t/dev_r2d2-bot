@@ -10,5 +10,9 @@ module.exports = model(
     Closed: Boolean,
     Locked: Boolean,
     Type: String,
+    Claimed: Boolean,
+    ClaimedBy: String,
+    CreatedBy: String,
+    Opened: String,
     })
 );
