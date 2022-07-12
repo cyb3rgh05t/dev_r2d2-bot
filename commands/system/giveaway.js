@@ -111,11 +111,11 @@ module.exports = {
                     prize,
                     messages : {
                         giveaway: '🎉🎉 **GIVEAWAY** 🎉🎉',
-                        giveawayEnded: '🎉🎉 **GIVEAWAY ENDED** 🎉🎉',
-                        winMessage: 'Congratulations, {winners}! You won **{this.prize}**!',
+                        giveawayEnded: '🎉🎉 **GIVEAWAY BEENDED** 🎉🎉',
+                        winMessage: 'Herzlichen Glückwunsch, {winners}! Du hast **{this.prize}** gewonnen!',
                     }
                 }).then(async () => {
-                    successEmbed.setDescription("Giveaway was successfully started.")
+                    successEmbed.setDescription("Giveaway wurde erfolgreich gestartet.")
                     return interaction.reply({embeds: [successEmbed], ephemeral: true});
                 }).catch((err) => {
                     errorEmbed.setDescription(`An error has occured\n\`${err}\``)

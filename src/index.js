@@ -30,7 +30,9 @@ client.prefixcmd = new Collection();
 
 module.exports = client;
 
-require("../systems/giveawaySys")(client);
+["giveawaySys"].forEach(system => {
+    require(`../systems/${system}`)(client)
+});
 
 ["events", "commands", "prefixcmd", "buttons"].forEach(handler => {
     require(`./handlers/${handler}`)(client, PG, Ascii)
