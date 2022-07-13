@@ -11,8 +11,11 @@ COPY package.json /usr/src/bot
 
 # Install dependencies
 RUN apt-get update || : && apt-get install python2.7 -y
+RUN npm config set python python2.7
 RUN npm install -g node-gyp
 RUN npm install -g node-pre-gyp
+RUN npm install node-libcurl --build-from-source
+RUN npm install canvas
 RUN npm install -d
 
 COPY . /usr/src/bot
