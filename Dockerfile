@@ -10,9 +10,6 @@ WORKDIR /usr/src/bot
 COPY package.json /usr/src/bot
 
 # Install dependencies
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt install python2.7 -y
-RUN npm config set python python2.7
 RUN npm install canvas@2.9.3
 RUN npm install
 
