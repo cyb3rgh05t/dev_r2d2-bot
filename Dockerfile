@@ -10,8 +10,10 @@ WORKDIR /usr/src/bot
 COPY package.json /usr/src/bot
 
 # Install dependencies
-RUN apt-get update || : && apt-get install python -y
-RUN npm install
+RUN apt-get update || : && apt-get install python2.7 -y
+RUN npm install -g node-gyp
+RUN npm install -g node-pre-gyp
+RUN npm install -d
 
 COPY . /usr/src/bot
 
