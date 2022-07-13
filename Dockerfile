@@ -1,5 +1,4 @@
 FROM node:16.9.1-alpine
-FROM python:2.7
 
 LABEL maintainer=cyb3rgh05t
 LABEL org.opencontainers.image.source https://github.com/cyb3rgh05t/dev_r2d2-bot
@@ -11,6 +10,7 @@ WORKDIR /usr/src/bot
 COPY package.json /usr/src/bot
 
 # Install dependencies
+RUN apt-get update || : && apt-get install python -y
 RUN npm install
 
 COPY . /usr/src/bot
