@@ -10,7 +10,7 @@ WORKDIR /usr/src/bot
 COPY package.json /usr/src/bot
 
 # Install dependencies
-RUN apt update && aptinstall -qq build-essential
+RUN apt-get update && apt-get install -qq build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev g++ software-properties-common
 RUN apt install python -y
 RUN npm install
 
