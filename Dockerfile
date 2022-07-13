@@ -10,7 +10,6 @@ WORKDIR /usr/src/bot
 COPY package.json /usr/src/bot
 
 # Install dependencies
-RUN npm install canvas@2.9.3
 RUN npm install
 
 COPY . /usr/src/bot
