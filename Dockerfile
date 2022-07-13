@@ -10,8 +10,8 @@ WORKDIR /usr/src/bot
 COPY package.json /usr/src/bot
 
 # Install dependencies
-RUN apt-get update && apt-get install -qq build-essential
-RUN apt-get install python -y
+RUN apt update && aptinstall -qq build-essential
+RUN apt install python -y
 RUN npm install
 
 COPY . /usr/src/bot
