@@ -21,7 +21,7 @@ jobs:
            min-versions-to-keep: 10
            delete-only-pre-release-versions: "false"
 
-      - uses: FranzDiebold/github-env-vars-action@v2.3.1
+      - uses: FranzDiebold/github-env-vars-action@v2.4.0
       - name: Print environment variables
         run: |
           echo "CI_REPOSITORY_NAME=$CI_REPOSITORY_NAME"
