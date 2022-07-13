@@ -110,14 +110,18 @@ module.exports = {
                     winnerCount,
                     prize,
                     messages : {
-                        giveaway: '<:streamnet:855771751820296232>🎉 **GIVEAWAY** 🎉<:streamnet:855771751820296232>',
-                        giveawayEnded: '<:streamnet:855771751820296232>🎉 **GIVEAWAY BEENDED** 🎉<:streamnet:855771751820296232>',
-                        inviteToParticipate: "Reagiere mit <:streamnet:855771751820296232> um teilzunehmen!",
-                        dropMessage: "Sei der erste der mit <:streamnet:855771751820296232> reagiert!",
+                        giveaway: '<:streamnet:855771751820296232>🎉 **GEWINNSPIEL** 🎉<:streamnet:855771751820296232>',
+                        giveawayEnded: '<:streamnet:855771751820296232>🎉 **GEWINNSPIEL BEENDED** 🎉<:streamnet:855771751820296232>',
+                        inviteToParticipate: 'Reagiere mit <:streamnet:855771751820296232> um teilzunehmen!',
+                        drawing: 'Restzeit: {timestamp}',
+                        dropMessage: 'Sei der erste der mit <:streamnet:855771751820296232> reagiert!',
                         winMessage: 'Herzlichen Glückwunsch, {winners}! Du hast **{this.prize}** gewonnen!',
+                        noWinner: 'Gewinnspiel abgesagt, keine gültigen Teilnahmen',
+                        embedFooter: '{this.winnerCount} Gewinner',
+                        hostedBy: 'Hosted von: {this.hostedBy}',
                     }
                 }).then(async () => {
-                    successEmbed.setDescription("Giveaway wurde erfolgreich gestartet.")
+                    successEmbed.setDescription("Gewinnspiel wurde erfolgreich gestartet.")
                     return interaction.reply({embeds: [successEmbed], ephemeral: true});
                 }).catch((err) => {
                     errorEmbed.setDescription(`An error has occured\n\`${err}\``)
@@ -145,7 +149,7 @@ module.exports = {
                         client.giveawaysManager
                         .end(messageId)
                         .then(() => {
-                            successEmbed.setDescription("Giveaway wurde beendet.");
+                            successEmbed.setDescription("Gewinnspiel wurde beendet.");
                             return interaction.reply({embeds: [successEmbed], ephemeral: true})
                         })
                         .catch((err) => {
@@ -159,7 +163,7 @@ module.exports = {
                         client.giveawaysManager
                         .paused(messageId)
                         .then(() => {
-                            successEmbed.setDescription("Giveaway wurde pausiert.");
+                            successEmbed.setDescription("Gewinnspiel wurde pausiert.");
                             return interaction.reply({embeds: [successEmbed], ephemeral: true})
                         })
                         .catch((err) => {
@@ -174,7 +178,7 @@ module.exports = {
                         client.giveawaysManager
                         .unpaused(messageId)
                         .then(() => {
-                            successEmbed.setDescription("Giveaway wurde wieder gestartet.");
+                            successEmbed.setDescription("Gewinnspiel wurde wieder gestartet.");
                             return interaction.reply({embeds: [successEmbed], ephemeral: true})
                         })
                         .catch((err) => {
@@ -189,7 +193,7 @@ module.exports = {
                         client.giveawaysManager
                         .reroll(messageId)
                         .then(() => {
-                            successEmbed.setDescription("Giveaway has been rerolled.");
+                            successEmbed.setDescription("Gewinnspiel wurde neu gestartet.");
                             return interaction.reply({embeds: [successEmbed], ephemeral: true})
                         })
                         .catch((err) => {
@@ -204,7 +208,7 @@ module.exports = {
                         client.giveawaysManager
                         .delete(messageId)
                         .then(() => {
-                            successEmbed.setDescription("Giveaway has been deleted.");
+                            successEmbed.setDescription("Gewinnspiel has been deleted.");
                             return interaction.reply({embeds: [successEmbed], ephemeral: true})
                         })
                         .catch((err) => {
