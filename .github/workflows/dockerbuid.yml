@@ -13,12 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.0.2
         
-      - name: Delete Package versions
-      - uses: actions/delete-package-versions@v3
+      - name: Delete Package Versions
+        uses: actions/delete-package-versions@v2.0.1
         with: 
-          package-name: 'dev_r2d2-bot'
-          min-versions-to-keep: 3
-          ignore-versions: '^(0|[1-9]\\d*)\\.0\\.0$'
+           package-name: 'dev_r2d2-bot'
+           token: ${{ secrets.CR_PAT }}
+           min-versions-to-keep: 10
+           delete-only-pre-release-versions: "false"
 
       - uses: FranzDiebold/github-env-vars-action@v2.3.1
       - name: Print environment variables
