@@ -14,10 +14,9 @@ jobs:
         uses: actions/checkout@v3.0.2
         
       - name: Delete Package Versions
-        uses: actions/delete-package-versions@v2.0.1
+        uses: actions/delete-package-versions@v3
         with: 
            package-name: 'dev_r2d2-bot'
-           token: ${{ secrets.CR_PAT }}
            min-versions-to-keep: 10
            delete-only-pre-release-versions: "false"
 
