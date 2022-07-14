@@ -1,4 +1,4 @@
-FROM node:16.9.1
+FROM node:18.5.0
 
 LABEL maintainer=cyb3rgh05t
 LABEL org.opencontainers.image.source https://github.com/cyb3rgh05t/dev_r2d2-bot
