@@ -14,32 +14,40 @@ module.exports = {
     execute(member) {
         const captcha = new Captcha(client, {
             guildID: guildId,
-            roleID: verifiedId, //optional
-            channelID: verifiedChannelId, //optional
-            sendToTextChannel: false, //optional, defaults to false
-            addRoleOnSuccess: true, //optional, defaults to true. whether you want the bot to add the role to the user if the captcha is solved
-            kickOnFailure: true, //optional, defaults to true. whether you want the bot to kick the user if the captcha is failed
-            caseSensitive: true, //optional, defaults to true. whether you want the captcha responses to be case-sensitive
-            attempts: 3, //optional, defaults to 1. number of attempts before captcha is considered to be failed
-            timeout: 60000, //optional, defaults to 60000. time the user has to solve the captcha on each attempt in milliseconds
-            showAttemptCount: true, //optional, defaults to true. whether to show the number of attempts left in embed footer
+            roleID: verifiedId,
+            channelID: verifiedChannelId,
+            sendToTextChannel: false,
+            addRoleOnSuccess: true,
+            kickOnFailure: true,
+            caseSensitive: true,
+            attempts: 3,
+            timeout: 60000,
+            showAttemptCount: true,
             customPromptEmbed: new MessageEmbed()
+            .setAuthor({ name: `${member.guild.name}`, iconURL: member.guild.iconURL({ dynamic: true }), url: 'https://discord.gg/gUmHCurE4g' })
             .setTitle(`Willkomen bei ${member.guild.name}!`)
-            .addField("Ich bin kein Roboter", `${member.user}, um Zugriff auf **${member.guild.name}** zu erhalten, löse bitte das CAPTCHA unten!\n\nDies, um den Server vor Razzien die aus Spam-Bots bestehen, zu schützen!`)
+            .setDescription(`**${member.user}**,\n um Zugriff auf **${member.guild.name}** zu erhalten, löse bitte das CAPTCHA unten!`)
+            .addFields(
+                { name: 'Was passiert wenn ich das Captcha nicht ausfülle?', value: 'Du wirst gekickt, um es erneut zu versuchen.' },
+            )
             .setColor("RANDOM")
-            .setThumbnail(member.guild.iconURL({ dynamic: true })), //customise the embed that will be sent to the user when the captcha is requested
+            .setThumbnail(member.guild.iconURL({ dynamic: true })),
             customSuccessEmbed: new MessageEmbed()
+            .setAuthor({ name: `${member.guild.name}`, iconURL: member.guild.iconURL({ dynamic: true }), url: 'https://discord.gg/gUmHCurE4g' })
             .setTitle("<:approved:995615632961847406> CAPTCHA Solved!")
             .setDescription(`${member.user}, du hast das CAPTCHA erfolgreich ausgefüllt und dir wurde Zugriff auf **${member.guild.name}** gewährt!`)
+            .addField("Bestätige die Regeln", "<#694495838013095967>")
             .setTimestamp()
             .setColor("GREEN")
-            .setThumbnail(member.guild.iconURL({ dynamic: true })), //customise the embed that will be sent to the user when the captcha is solved
+            .setThumbnail(member.guild.iconURL({ dynamic: true })),
             customFailureEmbed: new MessageEmbed()
-            .setTitle("<:rejected:995614671128244224> CAPTCHA failed!")
+            .setAuthor({ name: `${member.guild.name}`, iconURL: member.guild.iconURL({ dynamic: true }), url: 'https://discord.gg/gUmHCurE4g' })
+            .setTitle("<:rejected:995614671128244224> CAPTCHA Failed!")
             .setDescription(`${member.user}, du hast das CAPTCHA nicht erfolgreich ausgefüllt!`)
+            .addField("Du wurdest vom Server gekickt", "Um es erneut zu versuchen, klicke auf -> **[StreamNet Invite](https://discord.gg/gUmHCurE4g)**")
             .setTimestamp()
             .setColor("RED")
-            .setThumbnail(member.guild.iconURL({ dynamic: true })), //customise the embed that will be sent to the user when they fail to solve the captcha
+            .setThumbnail(member.guild.iconURL({ dynamic: true })),
         });
 
         captcha.present(member);
@@ -51,8 +59,14 @@ module.exports = {
             console.log(data);
 	        console.log(`[INFO]`.yellow.bold,`New User "${member.user.username}" has joined "${member.guild.name}"` );
             const newMemberMessage = `**${member.user}** joined the Server, we now have ${member.guild.memberCount} members!`;
-            // sends a message to the channel
             newMemberChannel.send(newMemberMessage)
         }));
+
+        /*if (captcha.on("failure" || "timeout", data => {
+            const { user, guild } = member
+            member.kick();
+            //console.log(`A Member has Solved a CAPTCHA!`);
+            console.log(data);
+        }));*/
     }
 }

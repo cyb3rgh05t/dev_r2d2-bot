@@ -85,9 +85,9 @@ module.exports = {
             const Button2 = options.getString("secondbutton").split(",");
             const Button3 = options.getString("thirdbutton").split(",");
 
-            const Emoji1 = Button1[1];
-            const Emoji2 = Button2[1];
-            const Emoji3 = Button3[1];
+            const Emoji1 = "<:help:997600514957119518>";
+            const Emoji2 = "<:invite:997600585098473502>";
+            const Emoji3 = "<:movie:997600641956454522>";
 
             await DB.findOneAndUpdate(
                 {GuildID: guild.id},
@@ -111,7 +111,7 @@ module.exports = {
                     new MessageButton()
                      .setCustomId(Button1[0])
                      .setLabel(Button1[0])
-                     .setStyle("PRIMARY")
+                     .setStyle("DANGER")
                      .setEmoji(Emoji1),
                     new MessageButton()
                      .setCustomId(Button2[0])
@@ -132,7 +132,8 @@ module.exports = {
             })
             .setTitle("StreamNet Support")
             .setDescription(Description)
-            .setColor("RANDOM");
+            .setColor("RANDOM")
+            .setThumbnail(guild.iconURL({dynamic: true}));
 
             await guild.channels.cache
                 .get(Channel.id)

@@ -16,7 +16,6 @@ module.exports = {
 
       const Embed = new MessageEmbed()
       .setColor("BLUE")
-      //.setAuthor(guild.name, guild.iconURL({dynamic: true}))
       .setAuthor({ name: guild.name, iconURL: guild.iconURL({dynamic: true})})
       .setThumbnail(guild.iconURL({dynamic: true}))
       .addFields(
