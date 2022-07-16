@@ -15,7 +15,7 @@ module.exports = async (client, PG, Ascii) => {
         if(!modalFile.id) return;
         
         client.modals.set(modalFile.id, modalFile);
-        await Table.addRow(`${modalFile.id}.js`, "✅", "Keine Probleme.");
+        await Table.addRow(`${modalFile.id}`, "🟩", "LOADED.");
         
     });
     console.log(Table.toString());
