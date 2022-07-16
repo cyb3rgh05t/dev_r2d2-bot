@@ -14,7 +14,7 @@ module.exports = async(client, PG, Ascii) => {
   
   (await PG(`${(process.cwd().replace(/\\/g, "/"))}/commands/*/*.js`)).map(async (file) => {
     const command = require(file);
-    if (command.length <= 0) return console.log("No SLASHCOMMANDS Found".yellow.bold);
+    if (command.length <= 0) return console.log("[WARNING] No SLASHCOMMANDS Found".yellow.bold);
     
     if(!command.name)
       return Table.addRow(file.split("/")[7], "🟥 FAILED", "missing a name.")

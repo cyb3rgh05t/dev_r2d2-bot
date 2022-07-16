@@ -6,7 +6,7 @@ module.exports = async (client, PG, Ascii) => {
 
     buttonsFolder.map(async (file) => {
         const buttonFile = require(file);
-        if (buttonFile.length <= 0) return console.log("No BUTTONS Found".yellow.bold);
+        if (buttonFile.length <= 0) return console.log("[WARNING] No BUTTONS Found".yellow.bold);
         if(!buttonFile.id)
         return Table.addRow(file.split("/")[7], "🟥 FAILED", "missing a button id.");
 

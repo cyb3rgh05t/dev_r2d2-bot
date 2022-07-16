@@ -7,7 +7,7 @@ module.exports = async (client, PG, Ascii) => {
     (await PG(`${(process.cwd().replace(/\\/g, "/"))}/prefixCommands/*/*.js`)).map(async (file) => {       
         const cmd = require(file);
        
-        if (cmd.length <= 0) return console.log("No PREFIXCOMMANDS Found".yellow.bold);
+        if (cmd.length <= 0) return console.log("[WARNING] No PREFIXCOMMANDS Found".yellow.bold);
         if(cmd.name){
             client.prefixcmd.set(cmd.name, cmd);
         }

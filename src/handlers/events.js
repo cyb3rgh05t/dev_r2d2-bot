@@ -6,7 +6,7 @@ module.exports = async (client, PG, Ascii) => {
 
     (await PG(`${(process.cwd().replace(/\\/g, "/"))}/events/*/*.js`)).map(async (file) => {
         const event = require(file);
-        if (event.length <= 0) return console.log("No EVENTS Found".yellow.bold);
+        if (event.length <= 0) return console.log("[WARNING] No EVENTS Found".yellow.bold);
         if(!Events.includes(event.name) || !event.name) {
             const L = file.split("/");
             await Table.addRow(`${event.name || "MISSING"}`, `🟥 Event name is either invalid or missing: ${L[6] + `/` + L[7]}`);
