@@ -46,7 +46,7 @@ module.exports = {
                 { name: "Accent Colour", value: target.user.accentColor ? `#${target.user.accentColor.toString(16)}` : "None", inline: true },
                 //{ name: "Banner", value: target.user.bannerURL() ? "** **" : "None" }
             )
-            .setImage(target.user.bannerURL({ dynamic: true, size: 512 }) || "");
+            
 
         interaction.reply({ embeds: [response], ephemeral: true });
     }

@@ -20,6 +20,13 @@ client.distube = new DisTube(client, {
     plugins: [new SpotifyPlugin()]
 });
 
+["giveawaySys"].forEach(system => {
+    require(`../systems/${system}`)(client)
+});
+
+["events", "commands", "prefixcmd", "buttons", "modals"].forEach(handler => {
+    require(`./handlers/${handler}`)(client, PG, Ascii)
+});
 
 client.tools = require("./console/errorEmbed");
 client.commands = new Collection();
@@ -27,16 +34,9 @@ client.buttons = new Collection();
 client.cooldowns = new Collection();
 client.userSettings = new Collection();
 client.prefixcmd = new Collection();
+client.modals = new Collection();
 
 module.exports = client;
-
-["giveawaySys"].forEach(system => {
-    require(`../systems/${system}`)(client)
-});
-
-["events", "commands", "prefixcmd", "buttons"].forEach(handler => {
-    require(`./handlers/${handler}`)(client, PG, Ascii)
-});
 
 
 client.login(token).then(() => {

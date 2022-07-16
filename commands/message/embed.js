@@ -1,141 +1,132 @@
-const { CommandInteraction, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { Client, CommandInteraction, MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu, Modal, Message } = require('discord.js')
 const db = require("../../src/schemas/embedDB");
 
-function fetch(channel, msg) {
-  return new Promise((resolve, reject) => {
-    channel.messages
-      .fetch(msg)
-      .then((message) => resolve(message))
-      .catch((err) => reject(err));
-  });
-}
-
 module.exports = {
-  name: "embed-buttons",
-  description: "Create a custom message embed",
-  usage: "/embed-bttons [action] [channel] [message-id]",
-  permission: "MANAGE_MESSAGES",
-  options: [
-    {
-      name: "action",
-      description: "embed tools",
-      type: "STRING",
-      required: true,
-      choices: [
+    name: 'customembed',
+    description: 'Erstelle dein eigenes Embed.',
+    permission: "ADMINISTRATOR",
+    options: [
         {
-          name: "new",
-          value: "new",
-        },
-        {
-          name: "template",
-          value: "template",
-        },
-        {
-          name: "edit",
-          value: "edit",
-        },
-      ],
-    },
-    {
-      name: "channel",
-      description: "message channel",
-      type: "CHANNEL",
-      required: false,
-    },
-    {
-      name: "message-id",
-      description: "enter message ID",
-      type: "STRING",
-      required: false,
-    },
-  ],
-  /**
-   * @param {CommandInteraction} interaction
-   * @param {Client} client
-   */
-  async execute(interaction, client) {
-    const { guild } = interaction;
-    const action = interaction.options.getString("action");
-    const messageID = interaction.options.getString("message-id");
-    const messageChannel = interaction.options.getChannel("channel");
-    const error = client.tools.error;
+            name: "channel",
+            description: "Gebe den Ziel Kanal an!",
+            type: "CHANNEL",
+            required: true
+        }
+    ],
 
-    const ROW_0 = new MessageActionRow().addComponents(
-      new MessageButton().setLabel("Set Title").setCustomId("CEtitle").setStyle("SECONDARY"),
-      new MessageButton().setLabel("Set Description").setCustomId("CEdescription").setStyle("SECONDARY"),
-      new MessageButton().setLabel("Set Color").setCustomId("CEcolor").setStyle("SECONDARY"),
-      new MessageButton().setLabel("Set Image").setCustomId("CEimage").setStyle("SECONDARY"),
-      new MessageButton().setLabel("Set Footer").setCustomId("CEfooter").setStyle("SECONDARY")
-    );
+    /**
+    *
+    * @param {CommandInteraction} interaction
+    * @param {Client} client
+    */
 
-    const ROW_1 = new MessageActionRow().addComponents(
-      new MessageButton().setLabel("Send").setCustomId("CEsend").setStyle("SUCCESS"),
-      new MessageButton().setLabel("Add Field").setCustomId("CEfields").setStyle("SECONDARY"),
-      new MessageButton().setLabel("Delete Field").setCustomId("CEfields_delete").setStyle("DANGER")
-    );
+    async execute(interaction, client) {
 
-    let CUSTOM_EMBED = new MessageEmbed().setDescription("\u200b").setColor("F4D58D");
+        const i = interaction;
+        const c = i.channel;
+        const g = i.guild;
+        const m = i.member;
+        const zc = i.options.getChannel("channel")
 
-    let BASE_EMBED = new MessageEmbed()
-      .setColor("F4D58D")
-      .setAuthor({
-        name: `${guild.name} | Embed Creator`,
-        iconURL: guild.iconURL({
-          dynamic: true,
-          size: 512,
-        }),
-      })
-      .setDescription(
-        `
-      **Use buttons to create a customized embed**
-      ㅤ
-      `
-      )
-      .setFields([
-        {
-          name: "__**Embed Length**__",
-          value: `Characters remaining \`${6000 - CUSTOM_EMBED.length}\``,
-        },
-      ])
-      .setFooter({ text: `Changes will be reflected on the embed below` });
+        
 
-    if (action === "template") {
-      if (!messageChannel) return error(interaction, "", "`message-channel` is required");
-      if (!messageID) return error(interaction, "", "`message-id` is required");
+        const Embed1 = new MessageEmbed()
+        .setTitle("Titel")
+        .setDescription("Beschreibung")
+        .setFooter({text: "Fußzeile mit Text & Icon"})
+        .setAuthor({name: "Autorzeile mit Text & Icon"})
+        .setFields([
+            {
+                name: "Feldname",
+                value: "Feldinhalt"
+            }
+        ])
+        .setColor("GREY")
 
-      const message = await fetch(messageChannel, messageID);
-      if (!message.embeds[0]) return error(interaction, "", "Message does not have an embed");
-      CUSTOM_EMBED = message.embeds[0];
+        const Embed2 = new MessageEmbed()
+        .setDescription("\u200b")
+        .setColor("GREY")
 
-      BASE_EMBED.fields[0] = {
-        name: "**Embed Length**",
-        value: `Characters remaining \`${6000 - CUSTOM_EMBED.length}\``,
-      };
+        const Row = new MessageActionRow()
+        .addComponents([
+            new MessageButton()
+            .setLabel("Titel")
+            .setCustomId("ce_title")
+            .setStyle("PRIMARY"),
+
+            new MessageButton()
+            .setLabel("Beschreibung")
+            .setCustomId("ce_description")
+            .setStyle("PRIMARY"),
+
+            new MessageButton()
+            .setLabel("Fußzeile")
+            .setCustomId("ce_footer")
+            .setStyle("PRIMARY"),
+
+            new MessageButton()
+            .setLabel("Autorzeile")
+            .setCustomId("ce_author")
+            .setStyle("PRIMARY"),
+
+            new MessageButton()
+            .setLabel("Embed Farbe")
+            .setCustomId("ce_color")
+            .setStyle("PRIMARY")
+            
+        ])
+
+        const Row2 = new MessageActionRow()
+        .addComponents(
+            [
+                new MessageButton()
+                .setLabel("Feld hinzufügen")
+                .setCustomId("ce_addField")
+                .setStyle("PRIMARY"),
+
+                new MessageButton()
+                .setLabel("Feld entfernen")
+                .setCustomId("ce_removeField")
+                .setStyle("PRIMARY"),
+    
+                new MessageButton()
+                .setLabel("Thumbnail")
+                .setCustomId("ce_thumbnail")
+                .setStyle("PRIMARY"),
+
+                new MessageButton()
+                .setLabel("Banner")
+                .setCustomId("ce_banner")
+                .setStyle("PRIMARY")
+            ]
+        )
+
+        const Row3 = new MessageActionRow()
+        .addComponents(
+            [
+                new MessageButton()
+                .setLabel("Senden")
+                .setCustomId("ce_send")
+                .setStyle("SUCCESS"),
+                
+                new MessageButton()
+                .setLabel("Reset")
+                .setCustomId("ce_reset")
+                .setStyle("DANGER")
+            ]
+        )
+
+        await interaction.reply({content: "Benutze dieses Menü um dein eigenes Embed zu erstellen!\nSolltest du das Menü nicht benutzen, wird es sich automatisch in 10 Minuten löschen!", ephemeral: true})
+        const message = await interaction.channel.send({embeds: [Embed1, Embed2], components: [Row, Row2, Row3]}).catch((err) => console.error(err.message));
+        await db.create({userId: m.id, messageId: message.id, finalChannel: zc.id}).catch((err) => console.error(err.message))
+
+
+        setTimeout(async function() {
+
+            await db.deleteOne({userId: m.user.id, messageId: message.id}).catch((err) => {throw err});
+            if(!message.deletable) return;
+            message.delete()
+
+        }, 600000)
     }
-
-    if (action === "edit") {
-      if (!messageChannel) return error(interaction, "", "`message-channel` is required");
-      if (!messageID) return error(interaction, "", "`message-id` is required");
-      let data = await db.findOne({ _id: interaction.user.id });
-      if (!data) {
-        data = new db({
-          _id: interaction.user.id,
-          channel: messageChannel.id,
-          message: messageID,
-        });
-        await data.save();
-      }
-
-      const message = await fetch(messageChannel, messageID);
-      if (!message.embeds[0]) return error(interaction, "", "Message does not have an embed");
-      CUSTOM_EMBED = message.embeds[0];
-
-      BASE_EMBED.fields[0] = {
-        name: "**Embed Length**",
-        value: `Characters remaining \`${6000 - CUSTOM_EMBED.length}\``,
-      };
-    }
-
-    interaction.reply({ embeds: [BASE_EMBED, CUSTOM_EMBED], components: [ROW_0, ROW_1] });
-  },
-};
+}

@@ -1,18 +1,11 @@
 const mongoose = require("mongoose");
 
-const embed = mongoose.Schema({
-  _id: {
-    type: mongoose.SchemaTypes.String,
-    default: null,
-  },
-  channel: {
-    type: mongoose.SchemaTypes.String,
-    default: null,
-  },
-  message: {
-    type: mongoose.SchemaTypes.String,
-    default: null,
-  },
+const CustomEmbedSchema = new mongoose.Schema({
+    userId: String,
+    messageId: String,
+    finalChannel: String
 });
 
-module.exports = mongoose.model("embed", embed);
+const CustomEmbedModel = mongoose.model("CustomEmbedDB", CustomEmbedSchema);
+
+module.exports = CustomEmbedModel;
