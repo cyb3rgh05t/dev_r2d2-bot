@@ -1,10 +1,9 @@
 const { CommandInteraction, Client, MessageEmbed, MessageAttachment } = require("discord.js")
-
 const { connection } = require("mongoose");
-const DB = require('../../src/databases/clientDB');
-
 const { execute } = require("../../events/client/ready");
+
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
+const DB = require('../../src/databases/clientDB');
 const moment = require("moment");
 
 require("../../events/client/ready");
@@ -145,17 +144,15 @@ module.exports = {
                 {
                     label: 'RAM Usage',
                     fill: true,
-                    backgroundColor: colors.green.low, //TODO: Change to a gradient
-                    // gradient: {
-                    //     backgroundColor: {
-                    //         axis: 'y',
-                    //         colors: {
-                    //             0: colors.green.half,
-                    //             50: colors.green.quarter,
-                    //             100: colors.green.zero
-                    //         },
-                    //     },
-                    // },
+                    gradient: {
+                        backgroundColor: {
+                            axis: 'y',
+                            colors: {
+                                0: colors.green.zero,
+                                100: colors.green.quarter,
+                            },
+                        },
+                    },
                     pointBackgroundColor: colors.green.default,
                     borderColor: colors.green.default,
                     data: memData,
@@ -174,10 +171,10 @@ module.exports = {
                 layout: {
                     padding: 10
                 },
-                responsive: false,
+                responsive: true,
                 plugins: {
                     legend: {
-                        display: true,
+                        display: false,
                     }
                 },
                 scales: {
@@ -238,7 +235,7 @@ module.exports = {
                 name: `<:icon_reply:993231553083736135> GENERAL`,
                 value: 
                 `
-                **\`•\` Client**: <:icon_online:993231898291736576> ONLINE
+                **\`•\` Client**: <:icon_online:970322600930721802> ONLINE
                 **\`•\` Ping**: ${client.ws.ping}ms
                 **\`•\` Uptime**: ${moment.duration(parseInt(client.uptime)).format(" D [days], H [hrs], m [mins], s [secs]")}
                 ㅤ
