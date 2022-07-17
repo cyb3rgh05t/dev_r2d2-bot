@@ -1,4 +1,4 @@
-const User = require("../database/userDB");
+const User = require("../databases/userDB");
 const cron = require("node-cron");
 
 module.exports = async (client) => {
