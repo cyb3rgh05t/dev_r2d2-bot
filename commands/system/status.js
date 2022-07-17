@@ -235,7 +235,7 @@ module.exports = {
                 name: `<:icon_reply:993231553083736135> GENERAL`,
                 value: 
                 `
-                **\`•\` Client**: <:icon_online:970322600930721802> ONLINE
+                **\`•\` Client**: <:icon_online:993231898291736576> ONLINE
                 **\`•\` Ping**: ${client.ws.ping}ms
                 **\`•\` Uptime**: ${moment.duration(parseInt(client.uptime)).format(" D [days], H [hrs], m [mins], s [secs]")}
                 ㅤ
