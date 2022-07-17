@@ -1,8 +1,6 @@
-const { model, Schema } = require('mongoose');
+const mongoose = require('mongoose');
 
-module.exports = model(
-    "TicketSetup",
-    new Schema({
+const ticketsetup = new mongoose.Schema({
     GuildID: String,
     Channel: String,
     Category: String,
@@ -11,4 +9,6 @@ module.exports = model(
     Everyone: String,
     Description: String,
     Buttons: [String],
-}))
+});
+
+module.exports = mongoose.model("TicketSetup", ticketsetup);

@@ -1,10 +1,8 @@
 const { CommandInteraction, MessageEmbed, MessageAttachment } = require("discord.js");
-
- const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
- const { generateChartConfig } = require('../../src/functions/chart');
- 
- const moment = require("moment");
- const ms = require("ms");
+const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
+const { generateChartConfig } = require('../../src/functions/chart');
+const moment = require("moment");
+const ms = require("ms");
  
  module.exports = {
     name: "info",

@@ -1,5 +1,5 @@
-const { unsharedChannelId, verifiedId, streamnetId } = require("../../src/config/config.json");
 const { GuildMember, MessageEmbed } = require("discord.js");
+const { unsharedChannelId, verifiedId, streamnetId } = require("../../src/config/config.json");
 
 module.exports = {
     name: "guildMemberRemove",

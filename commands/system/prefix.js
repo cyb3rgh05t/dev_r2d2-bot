@@ -1,5 +1,5 @@
 const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
-const GuildSettings = require("../../src/schemas/settingsDB");
+const GuildSettings = require("../../src/databases/settingsDB");
 const colors = require("colors");
 
 module.exports = {

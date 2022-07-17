@@ -1,16 +1,13 @@
 const { MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, Client, TextInputComponent } = require("discord.js");
-const db = require("../../src/schemas/embedDB");
+const db = require("../../src/databases/embedDB");
 
 module.exports = {
     id: "ce_footer_modal",
-
     /**
      * 
      * @param {ModalSubmitInteraction} interaction 
      * @param {Client} client 
      */
-
-
     async execute(interaction, client) {
         const i = interaction;
         const m = i.member;

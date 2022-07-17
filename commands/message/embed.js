@@ -1,5 +1,5 @@
 const { Client, CommandInteraction, MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu, Modal, Message } = require('discord.js')
-const db = require("../../src/schemas/embedDB");
+const db = require("../../src/databases/embedDB");
 
 module.exports = {
     name: 'customembed',

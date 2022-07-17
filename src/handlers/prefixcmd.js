@@ -1,5 +1,4 @@
 const colors = require("colors");
-const GuildSettings = require("../schemas/commandsDB.js");
 
 module.exports = async (client, PG, Ascii) => {
     const Table = new Ascii("Prefix Command Handler");

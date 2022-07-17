@@ -1,5 +1,4 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
-const User = require("../../src/schemas/userDB");
 const colors = require("colors");
 
 module.exports = {
@@ -23,7 +22,7 @@ module.exports = {
               return interaction.reply({ content: `You do not have the required permission for this command: \`${interaction.commandName}\`.`, ephemeral: true })
             }
 
-            const User = require("../../src/schemas/userDB");
+            const User = require("../../src/databases/userDB");
 
             if (command) {
               let user = client.userSettings.get(interaction.user.id);

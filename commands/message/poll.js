@@ -1,5 +1,5 @@
 const { CommandInteraction, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-const DB = require("../../src/schemas/pollDB");
+const DB = require("../../src/databases/pollDB");
 
 module.exports = {
     name: "poll",

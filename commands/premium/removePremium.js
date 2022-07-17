@@ -1,6 +1,6 @@
-const User = require("../../src/schemas/userDB");
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const { ownerId } = require("../../src/config/config.json");
+const User = require("../../src/databases/userDB");
 
 module.exports = {
     name: "remove-premium",

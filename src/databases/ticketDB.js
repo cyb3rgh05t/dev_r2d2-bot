@@ -1,8 +1,6 @@
-const { model, Schema } = require("mongoose");
+const mongoose = require("mongoose");
 
-module.exports = model(
-    "Tickets", 
-    new Schema({
+const tickets = new mongoose.Schema({
     GuildID: String,
     MembersID: [String],
     TicketID: String,
@@ -14,5 +12,6 @@ module.exports = model(
     ClaimedBy: String,
     CreatedBy: String,
     Opened: String,
-    })
-);
+    });
+
+    module.exports = mongoose.model("Tickets", tickets);

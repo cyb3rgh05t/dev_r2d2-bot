@@ -1,6 +1,6 @@
 const { ButtonInteraction, MessageEmbed, MessageActionRow, MessageButton } = require(`discord.js`);
-const DB = require("../../src/schemas/ticketDB");
-const TicketSetupData = require("../../src/schemas/ticketSetupDB");
+const DB = require("../../src/databases/ticketDB");
+const TicketSetupData = require("../../src/databases/ticketSetupDB");
 
 module.exports = {
     name: "interactionCreate",

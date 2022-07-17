@@ -1,7 +1,7 @@
 const { CommandInteraction, MessageEmbed, Client, GuildMember } = require("discord.js");
 const ms = require("ms");
-const DB = require("../../src/schemas/modDB");
-const warnModel = require("../../src/schemas/warnModelDB");
+const DB = require("../../src/databases/modDB");
+const warnModel = require("../../src/databases/warnDB");
 
 
 module.exports = {

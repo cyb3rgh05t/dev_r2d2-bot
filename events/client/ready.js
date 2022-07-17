@@ -1,12 +1,12 @@
 const { Client } = require("discord.js");
-const mongoose = require("mongoose");
 const { databaseUrl } = require("../../src/config/config.json");
 const os = require("os");
 const osUtils = require("os-utils");
 const ms = require("ms");
-const colors = require("colors")
-const User = require("../../src/schemas/userDB");
-const DB = require('../../src/schemas/clientDB');
+const colors = require("colors");
+const mongoose = require("mongoose");
+const User = require("../../src/databases/userDB");
+const DB = require('../../src/databases/clientDB');
 
 /* ----------[CPU Usage]---------- */
     const cpus = os.cpus();
@@ -36,13 +36,6 @@ module.exports = {
      * @param {Client} client
      */
    async execute(client) {
-        /*console.log(`┌─────────────────────────────────────────────────────────────┐`.bold.blue)
-        console.log(`│                                                             │`.bold.blue)
-        console.log(`│                                                             │`.bold.blue)
-        console.log(`│               `.blue.bold,`Logged in as ${client.user.tag}`.green.bold,`                 │`.bold.blue)
-        console.log(`│                                                             │`.bold.blue)
-        console.log(`│                                                             │`.bold.blue)
-        console.log(`└─────────────────────────────────────────────────────────────┘`.bold.blue)*/
         console.log(`[Logged in as ${client.user.tag}]`.green.bold)
         console.log(`[CLIENT READY]`.green.bold)
         console.log(`[INFO]`.yellow.bold,`Client is now ready and online!`);
@@ -98,11 +91,6 @@ module.exports = {
         }
 
         require('../../src/handlers/premium')(client)
-
-        //-------------- Systems --------------//
-        //require("../../Systems/ChatFilterSys")(client);
-
-        // -------------- Events --------------//
 
         // Memory Data Update
         let memArray = [];

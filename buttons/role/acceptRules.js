@@ -1,6 +1,6 @@
+const { MessageEmbed } = require("discord.js");
 const { memberId, streamnetId, welcomeChannelId } = require("../../src/config/config.json");
 const colors = require("colors");
-const { MessageEmbed } = require("discord.js");
 
 
 module.exports = {

@@ -1,5 +1,5 @@
 const { CommandInteraction, MessageEmbed } = require(`discord.js`);
-const DB = require("../../src/schemas/ticketDB");
+const DB = require("../../src/databases/ticketDB");
 
 module.exports = {
     name: "ticket",

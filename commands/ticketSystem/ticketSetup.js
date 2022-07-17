@@ -1,6 +1,6 @@
 const { CommandInteraction, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const colors = require("colors");
-const DB = require("../../src/schemas/ticketSetupDB");
+const DB = require("../../src/databases/ticketSetupDB");
 
 module.exports = {
     name: "ticketsetup",

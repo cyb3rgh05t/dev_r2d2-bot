@@ -1,7 +1,7 @@
-const moment = require("moment");
-const schema = require("../../src/schemas/codeDB");
-const User = require("../../src/schemas/userDB");
 const { CommandInteraction, Client } = require("discord.js");
+const moment = require("moment");
+const schema = require("../../src/databases/codeDB");
+const User = require("../../src/databases/userDB");
 
 module.exports = {
     name: "redeem",

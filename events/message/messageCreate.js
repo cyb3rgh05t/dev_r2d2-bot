@@ -1,8 +1,7 @@
 const client = require('../../src/index');
 const { Client, MessageEmbed } = require("discord.js");
-const GuildSettings = require('../../src/schemas/settingsDB');
-const GuildCommands = require('../../src/schemas/commandsDB');
 const { guildId, ownerId } = require("../../src/config/config.json");
+const GuildSettings = require('../../src/databases/settingsDB');
 const colors = require("colors");
 
 module.exports = {

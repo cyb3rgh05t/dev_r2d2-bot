@@ -1,5 +1,5 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
-const DB = require("../../src/schemas/modDB");
+const DB = require("../../src/databases/modDB");
 const colors = require("colors");
 
 
