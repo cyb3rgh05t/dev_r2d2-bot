@@ -2,7 +2,7 @@ const { MessageActionRow, MessageButton } = require("discord.js");
 
 module.exports = {
     name: "rule-button",
-    description: "Button to accept the Rules!",
+    description: "Button to accept the rules!",
     usage: "/rule-button",
     permission: "ADMINISTRATOR",
     execute(interaction) {

@@ -7,7 +7,7 @@ const ms = require("ms");
  module.exports = {
     name: "info",
     usage: "/info [user] or [server] or [channel]",
-    description: "Returns Info Based On The Command",
+    description: "Returns info based on the command",
     permission: "ADMINISTRATOR",
     options: [
         {

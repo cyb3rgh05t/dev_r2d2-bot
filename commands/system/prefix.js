@@ -4,8 +4,8 @@ const colors = require("colors");
 
 module.exports = {
 	name: "prefix",
-	description: "Change Guild Prefix",
-	usage: "/prefix",
+	description: "Change guild prefix",
+	usage: "/prefix [caracter]",
     permission: "ADMINISTRATOR",
 	options: [
 		{

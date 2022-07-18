@@ -3,12 +3,13 @@ const db = require("../../src/databases/embedDB");
 
 module.exports = {
     name: 'customembed',
-    description: 'Erstelle dein eigenes Embed.',
-    permission: "ADMINISTRATOR",
+    description: 'Create custom embed message',
+    usage: "/customembed [channel]",
+    permission: "SEND_MESSAGES",
     options: [
         {
             name: "channel",
-            description: "Gebe den Ziel Kanal an!",
+            description: "Choose channel target",
             type: "CHANNEL",
             required: true
         }

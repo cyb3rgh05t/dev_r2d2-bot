@@ -5,6 +5,8 @@ const warnModel = require("../../src/databases/warnDB");
 module.exports = {
     name: "infractions",
     description: "display the warnings a user has",
+    usage: "/infractions [target]",
+    permission: "ADMINISTRATOR",
     options: [
         {
             name: "target",

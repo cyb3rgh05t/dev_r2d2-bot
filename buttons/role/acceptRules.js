@@ -5,6 +5,7 @@ const colors = require("colors");
 
 module.exports = {
     id: "acceptRole",
+    permission: "MANAGE_MESSAGES",
     async execute(interaction) {
         const member = interaction.member;
  

@@ -3,6 +3,7 @@ const { CommandInteraction, MessageEmbed, Client } = require('discord.js')
 module.exports = {
     name: "music",
     description: "Complete music system",
+    usage: "/music [play] [volume] [settings]",
     permission: "ADMINISTRATOR",
     options: [
         {

@@ -3,6 +3,7 @@ const DB = require("../../src/databases/pollDB");
 
 module.exports = {
     id: "poll-5",
+    permission: "MANAGE_MESSAGES",
     /**
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 

@@ -5,7 +5,8 @@ const colors = require("colors");
 
 module.exports = {
     name: "giveaway",
-    description: "A complete giveaway System.",
+    description: "A complete giveaway system.",
+    usage: "/giveaway [command]",
     permission: "ADMINISTRATOR",
     options: [
         {

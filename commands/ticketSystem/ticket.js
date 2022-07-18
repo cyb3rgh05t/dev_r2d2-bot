@@ -3,7 +3,8 @@ const DB = require("../../src/databases/ticketDB");
 
 module.exports = {
     name: "ticket",
-    description: "Ticket Actions",
+    description: "Ticket actions",
+    usage: "/ticket [action] [member]",
     permission: "ADMINISTRATOR",
     options: [
         {

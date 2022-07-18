@@ -5,7 +5,7 @@ const User = require("../../src/databases/userDB");
 
 module.exports = {
     name: "redeem",
-    description: `redeem a premium code`,
+    description: `Redeem a premium code`,
     usage: "/redeem [code]",
     options: [
         {

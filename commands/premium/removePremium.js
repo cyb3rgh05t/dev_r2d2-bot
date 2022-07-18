@@ -4,7 +4,7 @@ const User = require("../../src/databases/userDB");
 
 module.exports = {
     name: "remove-premium",
-    description: "removes premium from a user",
+    description: "Removes premium from a user",
     usage: "/remove-premium [user]",
     permission: "ADMINISTRATOR",
     options: [

@@ -1,9 +1,10 @@
-const { MessageEmbed, CommandInteraction, Client } = require("discord.js");
+const { Client, SelectMenuInteraction, MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
+const fs = require('fs');
 
 module.exports = {
-  name: "help",
-  description: "shows all available commands",
-  usage: "/help [command]",
+    name: 'help',
+    description: 'Lists all Bot commands',
+    usage: "/help [command]",
   permission: "SEND_MESSAGES",
   options: [
     {
@@ -12,69 +13,69 @@ module.exports = {
       type: "STRING",
     },
   ],
-  /**
-   * @param {CommandInteraction} interaction
-   * @param {Client} client
-   */
-  async execute(interaction, client) {
-    let error = false;
-    let cmdFound = "";
-    const { options } = interaction;
+    /**
+     * @param {SelectMenuInteraction} interaction
+     * @param {Client} client
+     */
+    async execute(interaction, client) {
+        let cmdFound = "";
+        const { options } = interaction;
+        const embedDescription = new MessageEmbed();
 
-    const embed = new MessageEmbed().setTimestamp();
+        const cmdName = options.getString("command");
+        if (cmdName) {
+            await client.commands.map((cmd) => {
+                if (cmd.name == cmdName) {
+                    let cmdoptions = cmd.options;
+                    cmdFound = cmd.name;
+                    embedDescription.setTitle(`Help for \`/${cmd.name}\``);
+                    embedDescription.setColor("#0099ff");
+                    embedDescription.setDescription(
+                        `Description: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\``);
+                if (cmdoptions) {
+                    embedDescription.setDescription(
+                        `**Description**: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\`\n\n **Command Options**:`
+                     );
 
-    const cmdName = options.getString("command");
-    if (cmdName) {
-      await client.commands.map((cmd) => {
-        if (cmd.name == cmdName) {
-          let cmdoptions = cmd.options;
-          cmdFound = cmd.name;
-          embed.setTitle(`Help for /${cmd.name}`);
-          embed.setColor("#0099ff");
-          embed.setDescription(
-            `Description: ${cmd.description || "none"}\n Usage: ${
-              cmd.usage || "none"
-            }`
-          );
-          if (cmdoptions) {
-            embed.setDescription(
-              `Description: ${cmd.description || "none"}\n Usage: ${
-                cmd.usage || "none"
-              }\n **Commands** (might have choices within the command):`
-            );
-            cmdoptions.map((option) => {
-              embed.addField(
-                option.name,
-                `Description: ${option.description || "none"}`
-              );
+                    cmdoptions.map((option) => {
+                     embedDescription.addField(option.name, `${option.description || "None"}`);
+                    });
+                }
+                
+                } else if (!cmdFound) {
+                     embedDescription.setColor("RED");
+                     embedDescription.setTitle("no command");
+                     embedDescription.setDescription(`no commands was found with the name of \`/${cmdName}\`!\n Use \`/help\` to see all the available commands`);
+                }
             });
-          }
-          error = false;
-        } else if (!cmdFound) {
-          embed.setColor("RED");
-          embed.setTitle("no command");
-          embed.setDescription(
-            `no commands was found with the name of \`${cmdName}\`!\n Use \`/help\` to see all the available commands`
-          );
+            interaction.reply({ embeds: [embedDescription], ephemeral: true });
 
-          error = true;
+        } else {
+
+            const directories = await fs.readdirSync('commands');
+
+            const row = new MessageActionRow()
+                .addComponents(
+                    new MessageSelectMenu()
+                    .setCustomId('help-category')
+                    .setPlaceholder('Select a category')
+                    .addOptions([
+                        directories.map(dir => {
+                            return {
+                                label: dir,
+                                value: dir
+                            }
+                        })
+                    ])
+                );
+                
+                const embed = new MessageEmbed()
+                .setTitle('Help for all Bot Commands')
+                .setDescription('Select a category')
+                .setColor('#0099ff')
+                //.setTimestamp()
+
+            interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
         }
-      });
-    } else {
-      embed.setTitle("Available Commands");
-      embed.setColor("#0099ff");
-      embed.setDescription(
-        client.commands.map((cmd) => `\`/${cmd.name}\``).join(" ")
-      );
-      embed.setFooter({
-        text: `${client.commands.size} commands`,
-      });
-      error = false;
     }
-    await interaction.reply({
-      embeds: [embed],
-      ephemeral: error,
-    });
-    cmdFound = "";
-  },
-};
+}

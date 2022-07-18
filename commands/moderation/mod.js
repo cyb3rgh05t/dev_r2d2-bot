@@ -6,7 +6,8 @@ const warnModel = require("../../src/databases/warnDB");
 
 module.exports = {
     name: "mod",
-    description: "Moderation Commands",
+    description: "Moderation commands",
+    usage: "/mod [action]",
     permission: "ADMINISTRATOR",
     options: [
         {

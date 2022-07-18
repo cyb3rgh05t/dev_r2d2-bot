@@ -4,7 +4,7 @@ module.exports = {
     name: "role",
     description: "Manage a user's roles.",
     usage: "/role [role] [target]",
-    permission: "MANAGE_ROLES",
+    permission: "ADMINISTRATOR",
     options: [
         {
             name: "role",

@@ -4,11 +4,12 @@ const warnModel = require("../../src/databases/warnDB");
 module.exports = {
     name: "remove-warn",
     description: "warn a user",
+    usage: "/remove-warn [warnid]",
     permission: "ADMINISTRATOR",
     options: [
         {
             name: "warnid",
-            description: "Provide the ID of the warning.", //Change able.
+            description: "Provide the ID of the warning.",
             type: "STRING",
             required: true,
         },

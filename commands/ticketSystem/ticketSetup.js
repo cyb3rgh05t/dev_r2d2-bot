@@ -4,7 +4,9 @@ const DB = require("../../src/databases/ticketSetupDB");
 
 module.exports = {
     name: "ticketsetup",
-    description: "Setup your Ticket Panel",
+    description: "Setup your ticket panel",
+    usage: "/ticketsetup [channel] [category] [transcript] [helpers] [description] [buttons]",
+    permission: "ADMINISTRATOR",
     permission: "ADMINISTRATOR",
     options: [
         {

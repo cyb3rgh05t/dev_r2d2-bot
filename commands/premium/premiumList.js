@@ -6,7 +6,7 @@ const { ownerId } = require("../../src/config/config.json");
 module.exports = {
     name: "premium-list",
     description: "Shows a list of all premium users",
-    usage: "/premium-list [target]",
+    usage: "/premium-list",
     permission: "ADMINISTRATOR",
     /**
      * @param {CommandInteraction} interaction 
