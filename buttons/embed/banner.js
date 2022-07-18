@@ -3,7 +3,7 @@ const db = require("../../src/databases/embedDB");
 
 module.exports = {
     id: "ce_banner",
-
+    permission: "MANAGE_MESSAGES",
     /**
      * 
      * @param {ButtonInteraction} interaction 
