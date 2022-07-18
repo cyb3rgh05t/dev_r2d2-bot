@@ -20,7 +20,7 @@ module.exports = {
                         return `\`${file.split('.')[0]}\``
                     }).join(', ')}`)
                     .setFields([{name: 'Command description:', value: 'use \`/help [command_name]\`'}])
-                    .setColor('#0099ff')
+                    .setColor('YELLOW')
                     //.setTimestamp();
                     interaction.update({ embeds: [embed], ephemeral: true })
             

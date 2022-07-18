@@ -29,7 +29,7 @@ module.exports = {
                     let cmdoptions = cmd.options;
                     cmdFound = cmd.name;
                     embedDescription.setTitle(`Help for \`/${cmd.name}\``);
-                    embedDescription.setColor("#0099ff");
+                    embedDescription.setColor('YELLOW');
                     embedDescription.setDescription(
                         `Description: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\``);
                 if (cmdoptions) {
@@ -72,7 +72,7 @@ module.exports = {
                 const embed = new MessageEmbed()
                 .setTitle('Help for all Bot Commands')
                 .setDescription('Select a category')
-                .setColor('#0099ff')
+                .setColor('YELLOW')
                 //.setTimestamp()
 
             interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
