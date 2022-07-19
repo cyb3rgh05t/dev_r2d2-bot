@@ -1,7 +1,7 @@
 const { Client, Collection } = require("discord.js");
 const client = new Client({intents: 131071});
 
-const { token } = require("./config/config.json");
+const { nodes, SpotifyClientID, SpotifySecret, token } = require("./config/config.json");
 
 const { promisify } = require("util");
 const { glob } = require("glob");
@@ -11,6 +11,27 @@ const colors = require("colors");
 
 const { DisTube } = require('distube');
 const { SpotifyPlugin } = require('@distube/spotify');
+
+const Deezer = require("erela.js-deezer");
+const Spotify = require("better-erela.js-spotify").default;
+const Apple = require("better-erela.js-apple").default;
+const { Manager } = require("erela.js");
+
+client.manager = new Manager({
+    nodes,
+    plugins: [
+        new Spotify({
+            clientID: SpotifyClientID,
+            clientSecret: SpotifySecret,
+        }),
+        new Apple(),
+        new Deezer(),
+    ],
+    send: (id, payload) => {
+        let guild = client.guilds.cache.get(id);
+        if (guild) guild.shard.send(payload);
+    },
+});
 
 client.distube = new DisTube(client, {
     youtubeDL: false,

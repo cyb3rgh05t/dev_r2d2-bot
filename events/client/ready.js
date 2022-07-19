@@ -84,6 +84,9 @@ module.exports = {
                 console.log(`[ERROR]`.red.bold, err)
             });
 
+            //erela music
+            client.manager.init(client.user.id);
+
         // Initialising Premium Users
         const users = await User.find();
         for (let user of users) {
