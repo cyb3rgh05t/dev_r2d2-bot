@@ -31,10 +31,10 @@ module.exports = {
                     embedDescription.setTitle(`Help for \`/${cmd.name}\``);
                     embedDescription.setColor('YELLOW');
                     embedDescription.setDescription(
-                        `Description: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\``);
+                        `Description: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\`\n **Permission**: ${cmd.permission || "None"} `);
                 if (cmdoptions) {
                     embedDescription.setDescription(
-                        `**Description**: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\`\n\n **Command Options**:`
+                        `**Description**: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\`\n **Permission**: ${cmd.permission || "None"}\n\n **Command Options**:`
                      );
 
                     cmdoptions.map((option) => {
