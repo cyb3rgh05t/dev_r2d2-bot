@@ -60,8 +60,9 @@ module.exports = {
                             content: "Das Ticket ist bereits freigeschaltet",
                             ephemeral: true,
                         });
-                    await DB.updateOne({ ChannelID: channel.id}, { Locked: true});
+                    await DB.updateOne({ ChannelID: channel.id}, { Locked: false});
                     Embed.setDescription("🔓 | Dieses Ticket ist jetzt freigeschaltet.")
+
                     docs.MembersID.forEach((m) => {
                         channel.permissionOverwrites.edit(m, {
                             SEND_MESSAGES: true,
