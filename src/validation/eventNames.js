@@ -68,5 +68,7 @@ module.exports = {
         "warn",
         "webhookUpdate",
         "DistubeEvents",
+        "ErelaEvents",
+        "ErelaRaw",
     ]
 }
