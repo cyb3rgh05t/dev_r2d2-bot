@@ -17,6 +17,8 @@ const Spotify = require("better-erela.js-spotify").default;
 const Apple = require("better-erela.js-apple").default;
 const { Manager } = require("erela.js");
 
+require("./handlers/antiCrash")(client);
+
 client.manager = new Manager({
     nodes,
     plugins: [
