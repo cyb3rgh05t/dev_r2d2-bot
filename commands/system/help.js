@@ -5,7 +5,7 @@ module.exports = {
     name: 'help',
     description: 'Lists all Bot commands',
     usage: "/help [command]",
-  permission: "SEND_MESSAGES",
+    public: true,
   options: [
     {
       name: "command",
