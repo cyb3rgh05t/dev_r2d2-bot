@@ -4,7 +4,7 @@ module.exports = {
     name: "testpremium",
     description: "Test the premium command",
     usage: "/testpremium",
-    permisson: "ADMINISTRATOR",
+    permission: "ADMINISTRATOR",
     premium: true,
     execute(interaction) {
 
