@@ -36,9 +36,10 @@ module.exports = {
      * @param {Client} client
      */
    async execute(client) {
-        console.log(`[Logged in as ${client.user.tag}]`.green.bold)
-        console.log(`[CLIENT READY]`.green.bold)
-        console.log(`[INFO]`.yellow.bold,`Client is now ready and online!`);
+        console.log(`[CLIENT]`.green.bold, `| Checking Client....`);
+        console.log(`[CLIENT]`.green.bold, `| Logged in as ${client.user.tag}]`)
+        console.log(`[CLIENT]`.green.bold, `| Client is starting....`)
+        console.log(`[INFO]`.yellow.bold,`| Client is now ready and online!`);
         
         // Client Activity
             const initialStatus = setTimeout(() => {
@@ -78,14 +79,16 @@ module.exports = {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             }).then(() => {
-                console.log(`[DATABASE READY]`.green.bold)
+                console.log(`[DATABASE]`.green.bold, `Database is now ready`)
                 console.log(`[INFO]`.yellow.bold,`Connected to MongoDB Database!`);
             }).catch((err) => {
                 console.log(`[ERROR]`.red.bold, err)
             });
 
             //erela music
+            
             client.manager.init(client.user.id);
+        
 
         // Initialising Premium Users
         const users = await User.find();
