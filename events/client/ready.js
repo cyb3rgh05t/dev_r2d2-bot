@@ -46,6 +46,10 @@ module.exports = {
         // Commands
         client.publicCommands = public_CommandsArray;    
         console.log(`[COMMANDS]`.green.bold, `| Loaded ${public_CommandsArray.length} global commands`);
+        require("../../src/handlers/commands")
+        client.commands = CommandsArray;
+        console.log(`[COMMANDS]`.green.bold, `| Loaded ${CommandsArray.length} dev commands`);
+
         
         // Client Activity
             const initialStatus = setTimeout(() => {
