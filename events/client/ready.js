@@ -41,14 +41,14 @@ module.exports = {
         console.log(`[CLIENT]`.green.bold, `| Checking Client....`);
         console.log(`[CLIENT]`.green.bold, `| Logged in as ${client.user.tag}]`)
         console.log(`[CLIENT]`.green.bold, `| Client is starting....`)
-        console.log(`[INFO]`.yellow.bold,`| Client is now ready and online!`);
+        console.log(`[CLIENT]`.green.bold, `[INFO]`.yellow.bold,`| Client is now ready and online!`);
 
         // Commands
         client.publicCommands = public_CommandsArray;    
-        console.log(`[COMMANDS]`.green.bold, `| Loaded ${public_CommandsArray.length} global commands`);
-        require("../../src/handlers/commands")
-        client.commands = CommandsArray;
-        console.log(`[COMMANDS]`.green.bold, `| Loaded ${CommandsArray.length} dev commands`);
+        console.log(`[COMMANDS]`.green.bold, `[INFO]`.yellow.bold, `| Loaded ${public_CommandsArray.length} global commands`);
+        //require("../../src/handlers/commands")
+        //client.commands = CommandsArray;
+        //console.log(`[COMMANDS]`.green.bold, `[INFO]`.yellow.bold, `| Loaded ${CommandsArray.length} dev commands`);
 
         
         // Client Activity
@@ -90,7 +90,7 @@ module.exports = {
                 useUnifiedTopology: true
             }).then(() => {
                 console.log(`[DATABASE]`.green.bold, `| Database is now ready`)
-                console.log(`[INFO]`.yellow.bold,`| Connected to MongoDB Database!`);
+                console.log(`[DATABASE]`.green.bold, `[INFO]`.yellow.bold,`| Connected to MongoDB Database!`);
             }).catch((err) => {
                 console.log(`[ERROR] |`.red.bold, err)
             });

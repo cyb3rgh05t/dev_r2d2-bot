@@ -4,9 +4,9 @@ const genius = require("genius-lyrics");
 const gClient = new genius.Client();
 
 module.exports = {
-    name: "music",
+    name: "erela",
     description: "A complete music system",
-    usage: "/music [play] [volume] [settings]",
+    usage: "/erela [play] [volume] [settings]",
     public: true,
     options: [
         {
