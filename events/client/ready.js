@@ -1,4 +1,5 @@
 const { Client } = require("discord.js");
+const public_CommandsArray = require("../../src/handlers/public")
 const { databaseUrl } = require("../../src/config/config.json");
 const os = require("os");
 const osUtils = require("os-utils");
@@ -36,10 +37,15 @@ module.exports = {
      * @param {Client} client
      */
    async execute(client) {
+        //Bot Activity
         console.log(`[CLIENT]`.green.bold, `| Checking Client....`);
         console.log(`[CLIENT]`.green.bold, `| Logged in as ${client.user.tag}]`)
         console.log(`[CLIENT]`.green.bold, `| Client is starting....`)
         console.log(`[INFO]`.yellow.bold,`| Client is now ready and online!`);
+
+        // Commands
+        client.publicCommands = public_CommandsArray;    
+        console.log(`[COMMANDS]`.green.bold, `| Loaded ${public_CommandsArray.length} global commands`);
         
         // Client Activity
             const initialStatus = setTimeout(() => {
@@ -79,10 +85,10 @@ module.exports = {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             }).then(() => {
-                console.log(`[DATABASE]`.green.bold, `Database is now ready`)
-                console.log(`[INFO]`.yellow.bold,`Connected to MongoDB Database!`);
+                console.log(`[DATABASE]`.green.bold, `| Database is now ready`)
+                console.log(`[INFO]`.yellow.bold,`| Connected to MongoDB Database!`);
             }).catch((err) => {
-                console.log(`[ERROR]`.red.bold, err)
+                console.log(`[ERROR] |`.red.bold, err)
             });
 
             //erela music
@@ -120,5 +126,6 @@ module.exports = {
             });
 
         }, ms("5s")); //= 5000 (ms)
+        
     },
 }

@@ -19,6 +19,7 @@ module.exports = async(client, PG, Ascii) => {
     if(!command.name)
       return Table.addRow(file.split("/")[7], "🟥 FAILED", "missing a name.")
 
+
     if(!command.type && !command.description)
       return Table.addRow(command.name, "🟥 FAILED", "missing a description.")
 
@@ -31,12 +32,14 @@ module.exports = async(client, PG, Ascii) => {
 
     client.commands.set(command.name, command);
     CommandsArray.push(command);
-
+    //console.log(`${command.name.toUpperCase()} from ${file.split("/").pop()}`, `LOADED`.green.bold)
     await Table.addRow(command.name,"🟩 LOADED");
     
   });
 
   console.log(Table.toString());
+
+
      
     // PERMISSION CHECK //
 

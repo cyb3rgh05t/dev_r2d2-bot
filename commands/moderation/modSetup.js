@@ -5,7 +5,6 @@ const colors = require("colors");
 
 module.exports = {
     name: "modlogsetup",
-    public: true,
     usage: "/modlogsetup [channel]",
     permission: "ADMINISTRATOR",
     description: "Setup your message channel for the moderation messages used by [/mod]",
