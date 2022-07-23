@@ -1,3 +1,3 @@
-## dev_r2d2-bot
+## Mr.StreamNet
 
-moderation discord bot
+discord bot v13
