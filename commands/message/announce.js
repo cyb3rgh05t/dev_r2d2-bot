@@ -1,4 +1,5 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { streamnetId, supporterId} = require("../../src/config/config.json");
 
 module.exports = {
   name: "announce",
@@ -42,8 +43,8 @@ module.exports = {
         type: 'STRING',
         required: false,
         choices: [
-                { name: "@everyone", value: "@everyone" },
-                { name: "@here", value: "@here" }
+                { name: "@streamnet..er", value: "<@&694240145628463255>" },
+                { name: "@supporter", value: "<@&807277578082713671>" }
             ]
       }
   ],
@@ -74,10 +75,10 @@ module.exports = {
       });
     } else {
       interaction.reply({
-        content: `${ping === "@everyone" ? "@everyone" : "@here"}`,
+        content: `${ping === "<@&694240145628463255>" ? "<@&694240145628463255>" : "<@&807277578082713671>"}`,
         embeds: [embed],
         allowedMentions: {
-          parse: ['everyone']
+          parse: ['roles']
         }
       });
     }
