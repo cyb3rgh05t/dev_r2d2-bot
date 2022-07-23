@@ -1,5 +1,5 @@
 const { Client } = require("discord.js");
-const public_CommandsArray = require("../../src/handlers/public")
+//const public_CommandsArray = require("../../src/handlers/public")
 const { databaseUrl } = require("../../src/config/config.json");
 const os = require("os");
 const osUtils = require("os-utils");
@@ -44,8 +44,8 @@ module.exports = {
         console.log(`[CLIENT]`.green.bold, `[INFO]`.yellow.bold,`| Client is now ready and online!`);
 
         // Commands
-        client.publicCommands = public_CommandsArray;    
-        console.log(`[COMMANDS]`.green.bold, `[INFO]`.yellow.bold, `| Loaded ${public_CommandsArray.length} global commands`);
+        //client.publicCommands = public_CommandsArray;    
+        //console.log(`[COMMANDS]`.green.bold, `[INFO]`.yellow.bold, `| Loaded ${public_CommandsArray.length} global commands`);
         //require("../../src/handlers/commands")
         //client.commands = CommandsArray;
         //console.log(`[COMMANDS]`.green.bold, `[INFO]`.yellow.bold, `| Loaded ${CommandsArray.length} dev commands`);

@@ -1,5 +1,3 @@
-// Taken from https://github.com/Allvaa/lavalink-musicbot/blob/master/src/util.js.
-
 module.exports = class Util {
     static chunk(arr, size) {
         const temp = [];

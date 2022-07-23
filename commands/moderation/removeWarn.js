@@ -2,9 +2,9 @@ const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 const warnModel = require("../../src/databases/warnDB");
 
 module.exports = {
-    name: "remove-warn",
+    name: "removewarn",
     description: "warn a user",
-    usage: "/remove-warn [warnid]",
+    usage: "/removewarn [warnid]",
     permission: "ADMINISTRATOR",
     options: [
         {

@@ -1,133 +1,107 @@
-const { Client, CommandInteraction, MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu, Modal, Message } = require('discord.js')
-const db = require("../../src/databases/embedDB");
+const {CommandInteraction, MessageEmbed } = require("discord.js")
 
 module.exports = {
-    name: 'customembed',
-    description: 'Create custom embed message',
-    usage: "/customembed [channel]",
-    permission: "SEND_MESSAGES",
+    name: "embed",
+    description: "Advanced embed generation!",
+    usage: "/embed [generate]",
+    permission: "ADMINISTRATOR",
     options: [
         {
-            name: "channel",
-            description: "Choose channel target",
-            type: "CHANNEL",
-            required: true
+            name: "generate",
+            description: "Generate a custom embed!.",
+            type: "SUB_COMMAND",
+            options: [
+                { name: "colour", description: "Provide a colour for the embed.", type: "STRING"},
+                { name: "title", description: "Provide a title for the embed.", type: "STRING"},
+                { name: "url", description: "Provide a url for the embed.", type: "STRING"},
+                { name: "author", description: "Provide an author for the embed.", type: "STRING"},
+                { name: "description", description: "Provide a description for the embed.", type: "STRING"},
+                { name: "thumbnail", description: "Provide a thumbnail for the embed.", type: "STRING"},
+                { name: "image", description: "Provide an image for the embed.", type: "STRING"},
+                { name: "timestamp", description: "Enable timestamp?", type: "BOOLEAN"},
+                { name: "footer", description: "Provide a footer for the embed.", type: "STRING"},
+                { name: "fields", description: "name^value^inline (true or false)^^", type: "STRING" }
+            ]
+        },
+        {
+            name: "help",
+            description: "Tutorial on how to use /embed generate.",
+            type: "SUB_COMMAND"
         }
     ],
-
     /**
-    *
-    * @param {CommandInteraction} interaction
-    * @param {Client} client
-    */
+     * 
+     * @param {CommandInteraction} interaction 
+     */
+    async execute(interaction) {
+        const { options } = interaction;
+        const subCommand = options.getSubcommand();
 
-    async execute(interaction, client) {
+        switch(subCommand) {
+            case "generate":
+                const eFields     = [[], [], []];
+                const splitFields = [];
 
-        const i = interaction;
-        const c = i.channel;
-        const g = i.guild;
-        const m = i.member;
-        const zc = i.options.getChannel("channel")
-
-        
-
-        const Embed1 = new MessageEmbed()
-        .setTitle("Titel")
-        .setDescription("Beschreibung")
-        .setFooter({text: "Fußzeile mit Text & Icon"})
-        .setAuthor({name: "Autorzeile mit Text & Icon"})
-        .setFields([
-            {
-                name: "Feldname",
-                value: "Feldinhalt"
-            }
-        ])
-        .setColor("GREY")
-
-        const Embed2 = new MessageEmbed()
-        .setDescription("\u200b")
-        .setColor("GREY")
-
-        const Row = new MessageActionRow()
-        .addComponents([
-            new MessageButton()
-            .setLabel("Titel")
-            .setCustomId("ce_title")
-            .setStyle("PRIMARY"),
-
-            new MessageButton()
-            .setLabel("Beschreibung")
-            .setCustomId("ce_description")
-            .setStyle("PRIMARY"),
-
-            new MessageButton()
-            .setLabel("Fußzeile")
-            .setCustomId("ce_footer")
-            .setStyle("PRIMARY"),
-
-            new MessageButton()
-            .setLabel("Autorzeile")
-            .setCustomId("ce_author")
-            .setStyle("PRIMARY"),
-
-            new MessageButton()
-            .setLabel("Embed Farbe")
-            .setCustomId("ce_color")
-            .setStyle("PRIMARY")
-            
-        ])
-
-        const Row2 = new MessageActionRow()
-        .addComponents(
-            [
-                new MessageButton()
-                .setLabel("Feld hinzufügen")
-                .setCustomId("ce_addField")
-                .setStyle("PRIMARY"),
-
-                new MessageButton()
-                .setLabel("Feld entfernen")
-                .setCustomId("ce_removeField")
-                .setStyle("PRIMARY"),
-    
-                new MessageButton()
-                .setLabel("Thumbnail")
-                .setCustomId("ce_thumbnail")
-                .setStyle("PRIMARY"),
-
-                new MessageButton()
-                .setLabel("Banner")
-                .setCustomId("ce_banner")
-                .setStyle("PRIMARY")
-            ]
-        )
-
-        const Row3 = new MessageActionRow()
-        .addComponents(
-            [
-                new MessageButton()
-                .setLabel("Senden")
-                .setCustomId("ce_send")
-                .setStyle("SUCCESS"),
                 
-                new MessageButton()
-                .setLabel("Reset")
-                .setCustomId("ce_reset")
-                .setStyle("DANGER")
-            ]
-        )
+                const colour      = options.getString("colour");
+                const title       = options.getString("title");
+                const url         = options.getString("url");
+                const author      = options.getString("author");
+                const description = options.getString("description");
+                const thumbnail   = options.getString("thumbnail");
+                const image       = options.getString("image");
+                const timestamp   = options.getBoolean("timestamp");
+                const footer      = options.getString("footer");
+                let   fields      = options.getString("fields");
 
-        await interaction.reply({content: "Benutze dieses Menü um dein eigenes Embed zu erstellen!\nSolltest du das Menü nicht benutzen, wird es sich automatisch in 10 Minuten löschen!", ephemeral: true})
-        const message = await interaction.channel.send({embeds: [Embed1, Embed2], components: [Row, Row2, Row3]}).catch((err) => console.error(err.message));
-        await db.create({userId: m.id, messageId: message.id, finalChannel: zc.id}).catch((err) => console.error(err.message))
+                const embed       = new MessageEmbed();
 
+                if(url && url.includes("http"))             embed.setURL(url);
+                if(thumbnail && thumbnail.includes("http")) embed.setThumbnail(thumbnail);
+                if(image && image.includes("http"))         embed.setImage(image);
+                if(colour)                                  embed.setColor(colour.toUpperCase());
+                if(title)                                   embed.setTitle(title);
+                if(author)                                  embed.setAuthor(author);
+                if(description)                             embed.setDescription(description);
+                if(timestamp)                               embed.setTimestamp();
+                if(footer)                                  embed.setFooter(footer);
+                if(fields) {
+                    fields = fields.split("^");
+                    fields.forEach(e => {
+                        if(e.length > 0) {
+                            splitFields.push(e.trim())
+                        }
+                    });
+            
+                    let x = 0;
+                    for (let i = 0; i < splitFields.length; i++) {
+                        if(x == 3) x = 0;
+                        eFields[x].push(splitFields[i]);
+                        x++;
+                    }
+                        
+                    for (let i = 0; i < eFields[0].length; i++) {
+                        embed.addField(`${eFields[0][i]}`, `${eFields[1][i]}`, JSON.parse(eFields[2][i].toLowerCase()));
+                    }
+                }
 
-        setTimeout(async function() {
-
-            await db.deleteOne({userId: m.user.id, messageId: message.id}).catch((err) => {throw err});
-            if(!message.deletable) return;
-            message.delete()
-
-        }, 600000)
+                if(!embed.title && !embed.description && !embed.fields[0]) {
+                    embed.setDescription("You have not provided valid options!")
+                }
+                interaction.reply({embeds: [embed]});
+            break;
+            case "help":
+                const help = new MessageEmbed()
+                    .setTitle("/Embed Help")
+                    .setColor("GREEN")
+                    .setDescription("To send an embed you must provide at least a title, a description or a field.\n\nMost of the commands are fairly self explanitory except the fields command.\nIn order to send fields you must follow the following format:\n\n`name^value^inline^^`\n\nFor example, sending `Name^Wilson^True^^ Age^18^True^^ Interests^Airsoft, Gaming and Coding^False^^` would send:")
+                    .addFields(
+                        {name: "Name", value: "Wilson", inline: true},
+                        {name: "Age", value: "18", inline: true},
+                        {name: "Interests", value: "Airsoft, Gaming and Coding", inline: false}
+                    )    
+                interaction.reply({embeds: [help]})
+            break;
+        }
     }
 }

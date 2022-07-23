@@ -1,9 +1,9 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "role",
+    name: "rolemanager",
     description: "Manage a user's roles.",
-    usage: "/role [role] [target]",
+    usage: "/rolemanager [role] [target]",
     permission: "ADMINISTRATOR",
     options: [
         {

@@ -47,13 +47,11 @@ client.distube = new DisTube(client, {
     require(`../systems/${system}`)(client)
 });
 
-["events", "commands", "prefixcmd", "buttons", "modals", "public"].forEach(handler => {
+["events", "commands", "prefixcmd", "buttons", "modals"].forEach(handler => {
     require(`./handlers/${handler}`)(client, PG, Ascii)
 });
 
 
-
-client.publicCommands = [];
 client.tools = require("./console/errorEmbed");
 client.commands = new Collection();
 client.buttons = new Collection();
