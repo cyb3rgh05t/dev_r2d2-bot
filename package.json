@@ -1,5 +1,5 @@
 {
-  "name": "commander",
+  "name": "mr.streamnet",
   "version": "1.0.0",
   "description": "moderation discord bot",
   "main": "./src/index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cyb3rgh05t/dev_r2d2-bot.git"
+    "url": "git+https://github.com/cyb3rgh05t/mr.streamnet.git"
   },
   "keywords": [],
   "author": "cyb3rgh05t",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cyb3rgh05t/dev_r2d2-bot/issues"
+    "url": "https://github.com/cyb3rgh05t/mr.streamnet/issues"
   },
-  "homepage": "https://github.com/cyb3rgh05t/dev_r2d2-bot#readme",
+  "homepage": "https://github.com/cyb3rgh05t/mr.streamnet#readme",
   "dependencies": {
     "@discordjs/voice": "^0.11.0",
     "@distube/spotify": "^1.3.2",

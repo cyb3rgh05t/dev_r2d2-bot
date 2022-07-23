@@ -1,16 +1,16 @@
 ---
 version: "3"
 services:
-  dev_r2d2-bot:
-    hostname: "commander"
-    container_name: "commander"
+  discordbot:
+    hostname: "discordbot"
+    container_name: "discordbot"
     environment:
       - "PGID=1000"
       - "PUID=1000"
       - "TZ=Europe/Berlin"
       - "UMASK=022"
       - "TERM=xterm"
-    image: "ghcr.io/cyb3rgh05t/dev_r2d2-bot:latest"
+    image: "ghcr.io/cyb3rgh05t/mr.streamnet:latest"
     restart: "unless-stopped"
     volumes:
-      - "/opt/appdata/dev_r2d2-bot/config:/usr/src/bot/src/config:rw"
+      - "/opt/appdata/discordbot/config:/usr/src/bot/src/config:rw"

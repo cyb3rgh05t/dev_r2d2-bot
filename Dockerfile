@@ -1,7 +1,7 @@
 FROM node:16.16.0
 
 LABEL maintainer=cyb3rgh05t
-LABEL org.opencontainers.image.source https://github.com/cyb3rgh05t/dev_r2d2-bot
+LABEL org.opencontainers.image.source https://github.com/cyb3rgh05t/mr.streamnet
 
 # Create the bot's directory
 RUN mkdir -p /usr/src/bot
